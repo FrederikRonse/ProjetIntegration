@@ -1,0 +1,129 @@
+﻿using System;
+using System.Text;
+using EL;
+using static EL.CstmEx;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace DAL
+{
+    class DalPromo
+    {
+        /// <summary>
+        /// Retourne les modèles de promos par agences.
+        /// (les promotions globales sont celles du siège (AirCar Belgium).
+        /// Pour clients et employés.
+        /// </summary>
+        /// <param name="officeName"></param>
+        /// <returns> PromotionModel_Id, VehicleType_Id,[Name],Office_Name,[StartDate],[EndDate],[PercentReduc],[FixedReduc</returns>
+        public static DataTable GetPromoByOffice(string officeName)
+        {
+            DataTable dataToReturn = null;
+
+            using (SqlConnection connection = UtilsDAL.GetConnection())
+            {
+                StringBuilder sLog = new StringBuilder();
+                SqlParameter param1 = new SqlParameter("@officeName", officeName);
+
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("SchCommon.GetPromoModels", connection))
+                    {
+                        DataTable dataTemp = new DataTable();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add(param1);
+                        SqlDataAdapter datadapt = new SqlDataAdapter(command);
+                        sLog.Append("Open");
+                        connection.Open();
+                        datadapt.SelectCommand = command;
+                        sLog.Append("Fill");
+                        datadapt.Fill(dataTemp);
+                        dataToReturn = dataTemp;
+                    }
+                }
+                #region Catch
+                catch (SqlException sqlEx)
+                {
+                    sqlEx.Data.Add("Log", sLog);
+
+                    switch (sqlEx.Number)
+                    {
+                        case 4060:
+                            throw new CstmEx(ExType.badDB, sqlEx); //"Mauvaise base de données"
+                        case 18456:
+                            throw new CstmEx(ExType.badPWD, sqlEx); //"Mauvais mot de passe"
+
+                        default:
+                            throw new CstmEx(ExType.notHandledSql, sqlEx); //"Erreur SQL non traitée !" L'exception sera rError_Layerancée.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Data.Add("Log", sLog);
+                    throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
+                }
+                #endregion Catch
+            }
+            return dataToReturn;
+        }
+
+
+        /// <summary>
+        /// Récupération des promos liées à un type véhicule.
+        /// pour clients et employés.
+        /// </summary>
+        /// <param name="cstmrId"></param>
+        /// <returns>ALL =  PromotionModel_Id, VehicleType_Id,[Name],Office_Name,[StartDate],[EndDate],[PercentReduc],[FixedReduc</returns>
+        public static DataTable GetPromoByVehicle(int cstmrId)
+        {
+            DataTable dataToReturn = null;
+
+            using (SqlConnection connection = UtilsDAL.GetConnection())
+            {
+                StringBuilder sLog = new StringBuilder();
+                SqlParameter param1 = new SqlParameter("@vehicleId", cstmrId);
+
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("SchCommon.GetPromoByVehicle", connection))
+                    {
+                        DataTable dataTemp = new DataTable();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add(param1);
+                        SqlDataAdapter datadapt = new SqlDataAdapter(command);
+                        sLog.Append("Open");
+                        connection.Open();
+                        datadapt.SelectCommand = command;
+                        sLog.Append("Fill");
+                        datadapt.Fill(dataTemp);
+                        dataToReturn = dataTemp;
+                    }
+                }
+                #region Catch
+                catch (SqlException sqlEx)
+                {
+                    sqlEx.Data.Add("Log", sLog);
+
+                    switch (sqlEx.Number)
+                    {
+                        case 4060:
+                            throw new CstmEx(ExType.badDB, sqlEx); //"Mauvaise base de données"
+                        case 18456:
+                            throw new CstmEx(ExType.badPWD, sqlEx); //"Mauvais mot de passe"
+
+                        default:
+                            throw new CstmEx(ExType.notHandledSql, sqlEx); //"Erreur SQL non traitée !" L'exception sera rError_Layerancée.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Data.Add("Log", sLog);
+                    throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
+                }
+                #endregion Catch
+            }
+            return dataToReturn;
+        }
+    }
+}
+

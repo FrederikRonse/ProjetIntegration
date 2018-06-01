@@ -34,19 +34,22 @@ namespace EL
 
         /// <summary>
         /// Instancie une exception Custom.
+        /// (Remplace "throw New".
         /// </summary>
         /// <param name="exType"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        public static CstmEx CreateEx(ExType exType, Exception e = null)
+        public static CstmEx ThrowCstmEx(ExType exType, Exception e = null)
         {
-            //int exTypeN = (int)exType;
-            //return new CstmEx(exTypeN, e);
-            return new CstmEx(exType, e);
+            throw new CstmEx(exType, e);
         }
 
-        // Constructeur recevant le numéro d'erreur à déclancher
-        // et une éventuelle exception remontée (pour relancer une exception sql non traitée,...).
+        /// <summary>
+        ///  Constructeur recevant le numéro d'erreur à déclancher
+        ///  et une éventuelle exception remontée (pour relancer une exception sql non traitée,...).
+        /// </summary>
+        /// <param name="exType"></param>
+        /// <param name="e"></param>
         public CstmEx(ExType exType, Exception e = null)
         {
             _exType = exType;

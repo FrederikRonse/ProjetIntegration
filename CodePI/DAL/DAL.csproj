@@ -40,7 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DalOffice.cs" />
+    <Compile Include="DalRent.cs" />
+    <Compile Include="DalPromo.cs" />
+    <Compile Include="DalCustomer.cs" />
+    <Compile Include="DalVehicle.cs" />
+    <Compile Include="ResourceDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceDB.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UtilsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +58,12 @@
       <Project>{b09dc93a-3499-47e1-8a18-8a9b9c8c63f4}</Project>
       <Name>EL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ResourceDB.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceDB.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

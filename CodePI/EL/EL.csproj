@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExResource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
