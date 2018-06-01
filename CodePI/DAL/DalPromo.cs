@@ -7,7 +7,7 @@ using System.Data;
 
 namespace DAL
 {
-    class DalPromo
+    public class DalPromo
     {
         /// <summary>
         /// Retourne les modèles de promos par agences.
@@ -81,7 +81,7 @@ namespace DAL
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
                 StringBuilder sLog = new StringBuilder();
-                SqlParameter param1 = new SqlParameter("@vehicleId", cstmrId);
+                SqlParameter param1 = new SqlParameter("@vehicleTypeId", cstmrId);
 
                 try
                 {

@@ -16,7 +16,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            BL.Class1 class1 = new BL.Class1();
+            BO.Office office=class1.testc();
+            
+            ViewBag.Message = office.Name;
 
             return View();
         }

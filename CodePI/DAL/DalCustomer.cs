@@ -7,7 +7,7 @@ using System.Data;
 
 namespace DAL
 {
-    class DalCustomer
+    public class DalCustomer
     {
         /// <summary>
         /// Retourne les détails de contact d'un client.

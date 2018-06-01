@@ -80,15 +80,13 @@ namespace DAL
         /// <returns></returns>
         internal static SqlConnection GetConnection()
         {
-            ///
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder["Data Source"] = ResourceDB.DataSource;
             builder["Initial Catalog"] = ResourceDB.DB;
             builder["Integrated Security"] = ResourceDB.IntegratedSecurity;
-            builder["User"] = ResourceDB.Login;
-            builder["Password"] = ResourceDB.Password;
+            //builder["User"] = ResourceDB.Login;
+            //builder["Password"] = ResourceDB.Password;
             _connectionString = builder.ConnectionString;
-            ///
 
             if (_connectionString != null)
             {

@@ -61,7 +61,7 @@ namespace DAL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to local.
+        ///   Looks up a localized string similar to LAPTOP-RONSE.
         /// </summary>
         internal static string DataSource {
             get {

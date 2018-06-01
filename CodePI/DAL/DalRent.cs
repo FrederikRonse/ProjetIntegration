@@ -7,7 +7,7 @@ using System.Data;
 
 namespace DAL
 {
-    class DalRent
+    public class DalRent
     {
         /// <summary>
         /// Renvoie les détails d'une réservation.

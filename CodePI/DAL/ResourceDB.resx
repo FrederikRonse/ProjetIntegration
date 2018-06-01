@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DataSource" xml:space="preserve">
-    <value>local</value>
+    <value>LAPTOP-RONSE</value>
   </data>
   <data name="DB" xml:space="preserve">
     <value>AirCar</value>

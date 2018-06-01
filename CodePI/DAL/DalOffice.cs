@@ -7,7 +7,7 @@ using System.Data;
 
 namespace DAL
 {
-    class DalOffice
+    public class DalOffice
     {
         /// <summary>
         /// Retourne un employé par son id

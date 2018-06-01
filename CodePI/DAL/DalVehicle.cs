@@ -19,7 +19,7 @@ namespace DAL
 
     namespace DAL
     {
-        class DalVehicle
+        public class DalVehicle
         {
             /// <summary>
             /// table pour GetVehicleByFilter.
@@ -31,14 +31,14 @@ namespace DAL
                 private string _officeName;
                 private string _makeName;
                 private string _fuelName;
-                private int _doorsCount;
+                private byte _doorsCount;
                 // Propriétés.
                 public DateTime StartDate { get => _startDate; set => _startDate = value; }
                 public DateTime EndDate { get => _endDate; set => _endDate = value; }
                 public string OfficeName { get => _officeName; set => _officeName = value; }
                 public string MakeName { get => _makeName; set => _makeName = value; }
                 public string FuelName { get => _fuelName; set => _fuelName = value; }
-                public int DoorsCount { get => _doorsCount; set => _doorsCount = value; }
+                public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
             }
 
             /// <summary>
@@ -96,6 +96,67 @@ namespace DAL
                 return dataToReturn;
             }
 
+            /// <summary>
+            /// Récupère les images d'un type de véhicule.
+            /// </summary>
+            /// <param name="vehicleType_Id"></param>
+            /// <returns></returns>
+            public static DataTable GetPics(int vehicleType_Id)
+            {
+                DataTable dataToReturn = null;
+
+                using (SqlConnection connection = UtilsDAL.GetConnection())
+                {
+                    StringBuilder sLog = new StringBuilder();
+                    SqlParameter param1 = new SqlParameter("@VehicleType_Id", vehicleType_Id);
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand("SchCommon.GetPictures", connection))
+                        {
+                            DataTable dataTemp = new DataTable();
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.Add(param1);
+                            SqlDataAdapter datadapt = new SqlDataAdapter(command);
+                            sLog.Append("Open");
+                            connection.Open();
+                            datadapt.SelectCommand = command;
+                            sLog.Append("Fill");
+                            datadapt.Fill(dataTemp);
+                            dataToReturn = dataTemp;
+                        }
+                    }
+                    #region Catch
+                    catch (SqlException sqlEx)
+                    {
+                        sqlEx.Data.Add("Log", sLog);
+
+                        switch (sqlEx.Number)
+                        {
+                            case 4060:
+                                throw new CstmEx(ExType.badDB, sqlEx); //"Mauvaise base de données"
+                            case 18456:
+                                throw new CstmEx(ExType.badPWD, sqlEx); //"Mauvais mot de passe"
+
+                            default:
+                                throw new CstmEx(ExType.notHandledSql, sqlEx); //"Erreur SQL non traitée !" L'exception sera rError_Layerancée.
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.Data.Add("Log", sLog);
+                        throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
+                    }
+                    #endregion Catch
+                }
+                return dataToReturn;
+            }
+
+            /// <summary>
+            /// retourne une instance de chaque types de véhicules
+            /// correspondant aux filtres.
+            /// </summary>
+            /// <param name="vFilters"></param>
+            /// <returns></returns>
             public static DataTable GetVehiclesByFilter(VehicleFilters vFilters)
             {
                 DataTable dataToReturn = null;
