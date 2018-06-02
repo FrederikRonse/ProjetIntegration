@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 using System.Data;
 using BO;
 using EL;
@@ -11,12 +7,16 @@ using static EL.CstmEx;
 
 namespace BL
 {
-    public class Class1
+    public class BLOffice
     {
 
-        public Office testc()
+        /// <summary>
+        /// Retourne la liste de toutes les agences / emplacements.
+        /// </summary>
+        /// <returns></returns>
+        public List<Office> GetOffices()
         {
-            BO.Office office = new BO.Office();
+            List<Office> officeList = new List<Office>();
             try
             {
                 DataTable table = DAL.DalOffice.GetOfficeList();
@@ -28,21 +28,22 @@ namespace BL
                         {
                             Office tempOffice = new Office();
                             tempOffice.Name = row["Name"].ToString();
-                            office = tempOffice;
+                            officeList.Add(tempOffice);
                         }
                     }
                 }
-                return office;
+                return officeList;
             }
+            #region Catch
             catch (CstmEx cstmEx)
             {
                 throw new CstmEx(ExType.dtaRead, cstmEx); 
-
             }
             catch (Exception ex)
             {
                 throw new CstmEx(ExType.srvrError, ex);
             }
+            #endregion Catch
         }
     }
 }

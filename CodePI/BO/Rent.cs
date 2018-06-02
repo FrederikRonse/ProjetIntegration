@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class Rent
+    public class Rent
     {
         public int Id { get; set; }
         public int VehicleId { get; set; }
@@ -14,7 +14,11 @@ namespace BO
         public DateTime ReservationDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int Paid { get; set; }
-        public int EmployeeId { get; set; }
+        public decimal ToPay { get; set; }
+        public DateTime? PickupDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
+        public decimal Paid { get; set; }
+        public int? EmployeeId { get; set; }
+        public bool IsClosed { get; set; }
     }
 }

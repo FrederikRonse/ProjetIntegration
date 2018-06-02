@@ -74,7 +74,7 @@ namespace DAL
         /// </summary>
         /// <param name="cstmrId"></param>
         /// <returns>id,vehicle_Id, Customer_Id, ReservationDate, StartDate, EndDate, ToPay, PickupDate, ReturnDate, Paid, Employee_Id, IsClosed</returns>
-        public static DataTable GetRentsByCstmr(int cstmrId)
+        public static DataTable GetRentsByCstmr(int cstmrId, bool isClosed)
         {
             DataTable dataToReturn = null;
 
@@ -82,6 +82,7 @@ namespace DAL
             {
                 StringBuilder sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@Id", cstmrId);
+                SqlParameter param2 = new SqlParameter("@isClosed", cstmrId);
 
                 try
                 {
@@ -90,10 +91,11 @@ namespace DAL
                         DataTable dataTemp = new DataTable();
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
+                        command.Parameters.Add(param2);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;
+                        datadapt.SelectCommand = command;  
                         sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
                         dataToReturn = dataTemp;
@@ -139,7 +141,7 @@ namespace DAL
         /// <param name="paid"></param>
         /// <param name="employeeID"></param>
         /// <returns></returns>
-        public static int CreateRent(int vehicle_Id, int customer_Id, DateTime startDate, string endDate, decimal toPay, decimal paid = 0, int employeeID = 0)
+        public static int CreateRent(int vehicle_Id, int customer_Id, DateTime startDate, DateTime endDate, decimal toPay, decimal paid = 0, int employeeID = 0)
         {
             int _newId = 0;
 
@@ -217,7 +219,7 @@ namespace DAL
         /// <param name="toPay"></param>
         /// <param name="isClosed"></param>
         /// <param name="paid"></param>
-        public static void UpdateRent(int id, int vehicle_Id, int customer_Id, DateTime startDate, string endDate, decimal toPay, bool isClosed, decimal paid)
+        public static void UpdateRent(int id, int vehicle_Id, int customer_Id, DateTime startDate, DateTime endDate, decimal toPay, bool isClosed, decimal paid)
         {
             int _newId = 0;
 
