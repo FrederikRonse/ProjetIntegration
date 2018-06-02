@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class VehicleType
+      public class VehicleType
     {
         public int Id { get; set; }
         public string MakeName { get; set; }
@@ -41,26 +41,7 @@ namespace BO
         public bool? IsLarge { get; set; }
     }
 
-    /// <summary>
-    /// Classe intialement dans DAL.vehicle
-    /// permet de passer les filtres de selection de véhicules.
-    /// </summary>
-    public class Vehiclefilter
-    {
-        protected DateTime _startDate;
-        protected DateTime _endDate;
-        protected string _officeName;
-        protected string _makeName;
-        protected string _fuelName;
-        protected byte _doorsCount;
-        // Propriétés.
-        public DateTime StartDate { get => _startDate; set => _startDate = value; }
-        public DateTime EndDate { get => _endDate; set => _endDate = value; }
-        public string OfficeName { get => _officeName; set => _officeName = value; }
-        public string MakeName { get => _makeName; set => _makeName = value; }
-        public string FuelName { get => _fuelName; set => _fuelName = value; }
-        public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
-    }
+    
 
     ///// <summary>
     ///// version plus brouillonne mais plus rapide à l'usage.
@@ -76,7 +57,7 @@ namespace BO
     //    public string FuelName { get; set; }
     //    public string CCName { get; set; }
     //    public byte DoorsCount { get; set; }
-    //    public Pictures[] Pictures { get; set; }
+    //    public List<Picture> Pictures { get; set; }
     //}
 
 

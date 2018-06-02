@@ -16,7 +16,7 @@ namespace BL
         /// <returns></returns>
         public List<Office> GetOffices()
         {
-            List<Office> officeList = new List<Office>();
+            List<Office> _officeList = new List<Office>();
             try
             {
                 DataTable table = DAL.DalOffice.GetOfficeList();
@@ -28,11 +28,11 @@ namespace BL
                         {
                             Office tempOffice = new Office();
                             tempOffice.Name = row["Name"].ToString();
-                            officeList.Add(tempOffice);
+                            _officeList.Add(tempOffice);
                         }
                     }
                 }
-                return officeList;
+                return _officeList;
             }
             #region Catch
             catch (CstmEx cstmEx)

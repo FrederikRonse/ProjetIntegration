@@ -11,24 +11,24 @@ namespace DAL
     public class DalVehicle
     {
         /// <summary>
-        /// table pour GetVehicleByFilter déplacée dans BO (et référence BO ajoutée à DAL).
+        /// Classe pour passage des filtres.
         /// </summary>
-        //public class VehicleFilters
-        //{
-        //    protected DateTime _startDate;
-        //    protected DateTime _endDate;
-        //    protected string _officeName;
-        //    protected string _makeName;
-        //    protected string _fuelName;
-        //    protected byte _doorsCount;
-        //    // Propriétés.
-        //    public DateTime StartDate { get => _startDate; set => _startDate = value; }
-        //    public DateTime EndDate { get => _endDate; set => _endDate = value; }
-        //    public string OfficeName { get => _officeName; set => _officeName = value; }
-        //    public string MakeName { get => _makeName; set => _makeName = value; }
-        //    public string FuelName { get => _fuelName; set => _fuelName = value; }
-        //    public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
-        //}
+        public class VehicleFilters
+        {
+            protected DateTime _startDate;
+            protected DateTime _endDate;
+            protected string _officeName;
+            protected string _makeName;
+            protected string _fuelName;
+            protected byte _doorsCount;
+            // Propriétés.
+            public DateTime StartDate { get => _startDate; set => _startDate = value; }
+            public DateTime EndDate { get => _endDate; set => _endDate = value; }
+            public string OfficeName { get => _officeName; set => _officeName = value; }
+            public string MakeName { get => _makeName; set => _makeName = value; }
+            public string FuelName { get => _fuelName; set => _fuelName = value; }
+            public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
+        }
 
         /// <summary>
         /// retourne un véhicule par son ID.
@@ -146,7 +146,7 @@ namespace DAL
         /// </summary>
         /// <param name="vFilters"></param>
         /// <returns></returns>
-        public static DataTable GetVehiclesByFilter(BO.Vehiclefilter vFilters)
+        public static DataTable GetVehiclesByFilter(VehicleFilters vFilters)
         {
             DataTable dataToReturn = null;
 
@@ -259,22 +259,7 @@ namespace DAL
                 #endregion Catch
             }
         }
-
-
-
-        /// <summary>
-        /// enumération pour GetVehicleByFilter. / pas utilisé
-        /// </summary>
-        public enum EnumVehicleFilters
-        {
-            startDate,
-            endDate,
-            officeName,
-            makeName,
-            fuelName,
-            doorsCount,
-        }
-
+    
     }
 }
 

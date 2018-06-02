@@ -16,15 +16,15 @@ namespace BL
         /// <returns></returns>
         public Customer GetCustomer(int id)
         {
-            Customer customer = new Customer();
+            Customer _customer = new Customer();
             try
             {
-                DataTable table = DalCustomer.GetCstmrDetails(id);
-                if (table != null)
+                DataTable _table = DalCustomer.GetCstmrDetails(id);
+                if (_table != null)
                 {
-                    if (table.Rows.Count != 0)
+                    if (_table.Rows.Count != 0)
                     {
-                        DataRowView row = table.DefaultView[0];
+                        DataRowView row = _table.DefaultView[0];
                         Customer temp = new Customer
                         {
                             Name = row["Name"].ToString(),
@@ -34,10 +34,10 @@ namespace BL
                             Phone = row["Phone"].ToString()
                         };
 
-                        customer = temp;
+                        _customer = temp;
                     }
                 }
-                return customer;
+                return _customer;
             }
             #region Catch
             catch (CstmEx cstmEx)

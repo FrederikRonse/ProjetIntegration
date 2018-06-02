@@ -8,15 +8,10 @@ using static EL.CstmEx;
 
 namespace BL
 {
-    public class BLRent
+    public class BLPromo
     {
-        /// <summary>
-        /// Retourne une réservation par son ID.
-        /// Pour Employés uniquement.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Rent GetRent(int id)
+        
+        public Rent Getxxx(int id)
         {
             Rent _rent = new Rent();
             try
@@ -63,13 +58,7 @@ namespace BL
             #endregion Catch
         }
 
-        /// <summary>
-        /// retourne les réservations d'un client.
-        /// Clôturées ou pas au choix.
-        /// </summary>
-        /// <param name="cstmrId"></param>
-        /// <returns></returns>
-        public List<Rent> GetRentByCstmr(int cstmrId, bool isClosed)
+        public List<Rent> GetxxByxx(int cstmrId, bool isClosed)
         {
             List<Rent> _rents = new List<Rent>();
             try
@@ -120,57 +109,5 @@ namespace BL
             #endregion Catch
         }
 
-        /// <summary>
-        /// Création d'une réservation.
-        /// </summary>
-        /// <param name="newRent"></param>
-        public void CreateRent(Rent newRent)
-        {
-            if (newRent == null)
-            {
-                throw new ArgumentNullException(nameof(newRent));
-            }
-            try
-            {
-                
-                DalRent.CreateRent(newRent.VehicleId, newRent.CstmrId, newRent.StartDate, newRent.EndDate, newRent.ToPay, newRent.Paid, (int)newRent.EmployeeId);
-            }
-            #region Catch
-            catch (CstmEx cstmEx)
-            {
-                throw new CstmEx(ExType.dtaRead, cstmEx);
-            }
-            catch (Exception ex)
-            {
-                throw new CstmEx(ExType.srvrError, ex);
-            }
-            #endregion Catch
-        }
-
-        /// <summary>
-        /// update / clôture d'une réservation.
-        /// </summary>
-        /// <param name="newRent"></param>
-        public void UpdteRent(Rent newRent)
-        {
-            if (newRent == null)
-            {
-                throw new ArgumentNullException(nameof(Rent));
-            }
-            try
-            {
-                DalRent.UpdateRent(id:newRent.Id, vehicle_Id:newRent.VehicleId, customer_Id: newRent.CstmrId, startDate: newRent.StartDate, endDate:newRent.EndDate, toPay:newRent.ToPay, isClosed:newRent.IsClosed, paid:newRent.Paid);
-            }
-            #region Catch
-            catch (CstmEx cstmEx)
-            {
-                throw new CstmEx(ExType.dtaRead, cstmEx);
-            }
-            catch (Exception ex)
-            {
-                throw new CstmEx(ExType.srvrError, ex);
-            }
-            #endregion Catch
-        }
     }
 }
