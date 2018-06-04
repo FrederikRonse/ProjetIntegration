@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLCustomer.cs" />
+    <Compile Include="BLPromo.cs" />
     <Compile Include="BLRent.cs" />
     <Compile Include="BLVehicle.cs" />
     <Compile Include="BLOffice.cs" />

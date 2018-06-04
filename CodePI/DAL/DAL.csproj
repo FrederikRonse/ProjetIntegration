@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BO\BO.csproj">
-      <Project>{5b7c3c9c-bab3-4eb0-8605-0550d3476932}</Project>
-      <Name>BO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EL\EL.csproj">
       <Project>{b09dc93a-3499-47e1-8a18-8a9b9c8c63f4}</Project>
       <Name>EL</Name>
