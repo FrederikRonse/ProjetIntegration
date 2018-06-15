@@ -150,16 +150,16 @@ namespace BL
         /// <summary>
         /// update / clôture d'une réservation.
         /// </summary>
-        /// <param name="newRent"></param>
-        public void UpdteRent(Rent newRent)
+        /// <param name="rentToUpdate"></param>
+        public void UpdteRent(Rent rentToUpdate)
         {
-            if (newRent == null)
+            if (rentToUpdate == null)
             {
                 throw new ArgumentNullException(nameof(Rent));
             }
             try
             {
-                DalRent.UpdateRent(id:newRent.Id, vehicle_Id:newRent.VehicleId, customer_Id: newRent.CstmrId, startDate: newRent.StartDate, endDate:newRent.EndDate, toPay:newRent.ToPay, isClosed:newRent.IsClosed, paid:newRent.Paid);
+                DalRent.UpdateRent(id:rentToUpdate.Id, vehicle_Id:rentToUpdate.VehicleId, customer_Id: rentToUpdate.CstmrId, startDate: rentToUpdate.StartDate, endDate:rentToUpdate.EndDate, toPay:rentToUpdate.ToPay, isClosed:rentToUpdate.IsClosed, paid:rentToUpdate.Paid);
             }
             #region Catch
             catch (CstmEx cstmEx)

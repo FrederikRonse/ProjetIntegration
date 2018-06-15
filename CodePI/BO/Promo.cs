@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class Promo
+    public class Promo
     {
         public int PromotionModel_Id { get; set; }
         public int VehicleType_Id { get; set; }
