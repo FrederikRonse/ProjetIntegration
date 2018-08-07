@@ -10,41 +10,19 @@
 
                     <div class="form-group">
                         <label>Pick-up Place</label>
-                        @Html.DropDownList("CatFilter", (SelectList)Session["lstAgencies"], new { @class = "form-control" })
-                        @*<select class="custom-control custom-select">
-                                <option selected="" value="Select the pick-up place">Select the pick-up place</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>*@
+                        @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control" })
                     </div>
-
                     <div class="form-group">
                         <label>Make</label>
-                        <select class="custom-control custom-select">
-                            <option selected="" value="Select the make">Select the make</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        @Html.DropDownList("makeFilter", (SelectList)Session["lstMakes"], "Select the make", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Fuel Type</label>
-                        <select class="custom-control custom-select">
-                            <option selected="" value="Select the fuel type">Select the fuel type</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        @Html.DropDownList("fuelFilter", (SelectList)Session["lstFuels"], "Select the fuel type", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Number of Doors</label>
-                        <select class="custom-control custom-select">
-                            <option selected="" value="Select the number of doors">Select the number of doors</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        @Html.DropDownList("doorsFilter", (SelectList)Session["lstDoors"], "Select the number of doors", new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">

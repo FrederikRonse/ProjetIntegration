@@ -11,11 +11,13 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["lstAgencies"] == null)
+            if (Session["lstOffices"] == null)
             {
-                List<string> _lstAgencies = new List<string>() { "un", "deux", "trois" };
+                BL.BLOffice _bLOffice = new BL.BLOffice();
+               List<BO.Office> _officeList = _bLOffice.GetOffices();
+                Session["lstOffices"] = new SelectList(_officeList, "Name", "Name"); // , _officeList[0].Name
 
-                Session["lstAgencies"] = new SelectList(_lstAgencies);
+
             }
 
             return View();
