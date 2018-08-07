@@ -11,6 +11,13 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["lstAgencies"] == null)
+            {
+                List<string> _lstAgencies = new List<string>() { "un", "deux", "trois" };
+
+                Session["lstAgencies"] = new SelectList(_lstAgencies);
+            }
+
             return View();
         }
 
