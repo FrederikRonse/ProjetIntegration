@@ -13,19 +13,20 @@ namespace WebApplication1.Controllers
         {
             if (Session["lstOffices"] == null)
             {
-                BL.BLOffice _bLOffice = new BL.BLOffice();
-               List<BO.Office> _officeList = _bLOffice.GetOffices();
-                Session["lstOffices"] = new SelectList(_officeList, "Name", "Name"); // , _officeList[0].Name
-
-
+                BL.BLVehicle _bLVehicle = new BL.BLVehicle();
+                BO.FilterOptions _filterOptions = _bLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
+                _filterOptions.lstOffices.Remove("AirCar Belgium");
+                Session["lstOffices"] = new SelectList(_filterOptions.lstOffices);
+                Session["lstMakes"] = new SelectList(_filterOptions.lstMakes);
+                Session["lstFuels"] = new SelectList(_filterOptions.lstFuels);
+                Session["lstDoors"] = new SelectList(_filterOptions.lstDoors);
             }
-
             return View();
         }
 
         public ActionResult About()
         {
-    
+
             ViewBag.Message = "";
 
             return View();
@@ -33,7 +34,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult Contact()
         {
-            
+
             ViewBag.Message = "page \"contact\"";
 
             return View();

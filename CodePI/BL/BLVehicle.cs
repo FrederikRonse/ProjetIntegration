@@ -15,7 +15,7 @@ namespace BL
     {
 
         /// <summary>
-        /// Permet de passe les filtres de selection
+        /// Permet de passer les filtres de selection
         /// entre la partie web et la dal.
         /// </summary>
         public class Vehiclefilter : DalVehicle.VehicleFilters
@@ -28,6 +28,63 @@ namespace BL
             public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
         }
 
+        /// <summary>
+        /// Retourne les filtres possibles pour la selection des véhicules.
+        /// </summary>
+        /// <returns></returns>
+        public FilterOptions GetFilterOptions()
+        {
+            FilterOptions _filterToReturn = new FilterOptions();
+            try
+            {
+                DataSet dataSet = DAL.DalVehicle.GetFilterOptions();
+                if (dataSet != null)
+                {
+                    List<string> _officeList = new List<string>();
+                    List<string> _MakeList = new List<string>();
+                    List<string> _CCList = new List<string>();
+                    List<string> _FuelList = new List<string>();
+                    List<byte> _DoorsList = new List<byte>();
+
+                    foreach (DataRow row in dataSet.Tables["OfficeList"].Rows)
+                    {
+                        _officeList.Add(row[0].ToString());
+                    }
+                    foreach (DataRow row in dataSet.Tables["MakeList"].Rows)
+                    {
+                        _MakeList.Add(row[0].ToString());
+                    }
+                    foreach (DataRow row in dataSet.Tables["CCList"].Rows)
+                    {
+                        _CCList.Add(row[0].ToString());
+                    }
+                    foreach (DataRow row in dataSet.Tables["FuelList"].Rows)
+                    {
+                        _FuelList.Add(row[0].ToString());
+                    }
+                    foreach (DataRow row in dataSet.Tables["DoorsList"].Rows)
+                    {
+                        _DoorsList.Add((byte)row[0]);
+                    }
+                    _filterToReturn.lstOffices = _officeList;
+                    _filterToReturn.lstMakes = _MakeList;
+                    _filterToReturn.lstCC = _CCList;
+                    _filterToReturn.lstFuels = _FuelList;
+                    _filterToReturn.lstDoors = _DoorsList;
+                }
+                return _filterToReturn;
+            }
+            #region Catch
+            catch (CstmEx cstmEx)
+            {
+                throw new CstmEx(ExType.dtaRead, cstmEx);
+            }
+            catch (Exception ex)
+            {
+                throw new CstmEx(ExType.srvrError, ex);
+            }
+            #endregion Catch
+        }
 
         /// <summary>
         /// retourne un véhicle par son ID, sans détails

@@ -16,11 +16,11 @@ namespace DAL
         /// <returns>[Name],[Surname],BirthDate,Email</returns>
         public static DataTable GetCstmrDetails(int id)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@Id", id);
 
                 try
@@ -31,18 +31,18 @@ namespace DAL
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -57,12 +57,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
 
 
@@ -81,7 +81,7 @@ namespace DAL
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param0 = new SqlParameter("@new_ID", SqlDbType.Int, 0); // 0 en output par défaut.
                 param0.Direction = System.Data.ParameterDirection.Output;
                 SqlParameter param1 = new SqlParameter("@name", name);
@@ -96,9 +96,9 @@ namespace DAL
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
-                        sLog.Append("ExecuteNonQuery");
+                        _sLog.Append("ExecuteNonQuery");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected == 0) throw new CstmEx(ExType.dtaWrite);      // La création a échoué.
                         if (rowsAffected > 1) throw new CstmEx(ExType.sqlLineCount);  // nbre de lignes affectées erroné.
@@ -108,7 +108,7 @@ namespace DAL
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -123,7 +123,7 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaWrite, ex);
                 }
                 #endregion Catch
@@ -145,7 +145,7 @@ namespace DAL
         {
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param0 = new SqlParameter("@id", id);
                 SqlParameter param1 = new SqlParameter("@name", name);
                 SqlParameter param2 = new SqlParameter("@surName", surName);
@@ -159,9 +159,9 @@ namespace DAL
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
-                        sLog.Append("ExecuteNonQuery");
+                        _sLog.Append("ExecuteNonQuery");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected == 0) throw new CstmEx(ExType.dtaUpdate); //  La modification n'a pas pu être effectuée ! \n Veuillez réessayer.
                         if (rowsAffected > 1) throw new CstmEx(ExType.sqlLineCount);  // nbre de lignes affectées erroné
@@ -170,7 +170,7 @@ namespace DAL
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -185,7 +185,7 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaUpdate, ex); //"La modification n'a pas pu être effectuée !"
                 }
                 #endregion Catch

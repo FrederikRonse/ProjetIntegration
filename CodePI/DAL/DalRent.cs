@@ -18,11 +18,11 @@ namespace DAL
         /// <returns>id,vehicle_Id, Customer_Id, ReservationDate, StartDate, EndDate, ToPay, PickupDate, ReturnDate, Paid, Employee_Id, IsClosed</returns>
         public static DataTable GetRentById(int id)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@Id", id);
 
                 try
@@ -33,18 +33,18 @@ namespace DAL
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -59,12 +59,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
 
 
@@ -76,11 +76,11 @@ namespace DAL
         /// <returns>id,vehicle_Id, Customer_Id, ReservationDate, StartDate, EndDate, ToPay, PickupDate, ReturnDate, Paid, Employee_Id, IsClosed</returns>
         public static DataTable GetRentsByCstmr(int cstmrId, bool isClosed)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@Id", cstmrId);
                 SqlParameter param2 = new SqlParameter("@isClosed", cstmrId);
 
@@ -93,18 +93,18 @@ namespace DAL
                         command.Parameters.Add(param1);
                         command.Parameters.Add(param2);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;  
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -119,12 +119,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
 
 
@@ -147,7 +147,7 @@ namespace DAL
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param0 = new SqlParameter("@new_ID", SqlDbType.Int, 0); // 0 en output par défaut.
                 param0.Direction = System.Data.ParameterDirection.Output;
                 SqlParameter param1 = new SqlParameter("@Vehicle_Id", vehicle_Id);
@@ -171,9 +171,9 @@ namespace DAL
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
-                        sLog.Append("ExecuteNonQuery");
+                        _sLog.Append("ExecuteNonQuery");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected == 0) throw new CstmEx(ExType.dtaWrite);
                         if (rowsAffected > 1) throw new CstmEx(ExType.sqlLineCount);
@@ -183,7 +183,7 @@ namespace DAL
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -198,7 +198,7 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaWrite, ex);
                 }
                 #endregion Catch
@@ -225,7 +225,7 @@ namespace DAL
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param0 = new SqlParameter("@id", id);
                 SqlParameter param1 = new SqlParameter("@Vehicle_Id", vehicle_Id);
                 SqlParameter param2 = new SqlParameter("@Customer_Id", customer_Id);
@@ -241,9 +241,9 @@ namespace DAL
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
-                        sLog.Append("ExecuteNonQuery");
+                        _sLog.Append("ExecuteNonQuery");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected == 0) throw new CstmEx(ExType.dtaUpdate);
                         if (rowsAffected > 1) throw new CstmEx(ExType.sqlLineCount);
@@ -253,7 +253,7 @@ namespace DAL
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -268,7 +268,7 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaUpdate, ex);
                 }
                 #endregion Catch

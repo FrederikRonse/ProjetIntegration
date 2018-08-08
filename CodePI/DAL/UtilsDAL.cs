@@ -29,7 +29,7 @@ namespace DAL
         public static bool Check(string login, string password)
         {
 
-            string dataToReturn = null;
+            string _dataToReturn = null;
             SqlCommand command = new SqlCommand();
             SqlConnection connection = new SqlConnection();
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -47,7 +47,7 @@ namespace DAL
                 command.Connection = connection;
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT CURRENT_USER";
-                dataToReturn = (string)command.ExecuteScalar();
+                _dataToReturn = (string)command.ExecuteScalar();
                 connection.Close();
             }
             catch (SqlException sqlEx)
@@ -69,7 +69,7 @@ namespace DAL
                 if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
-            UserName = dataToReturn;
+            UserName = _dataToReturn;
             return true;
         }
 

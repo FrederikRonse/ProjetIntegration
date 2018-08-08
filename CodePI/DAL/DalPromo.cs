@@ -18,11 +18,11 @@ namespace DAL
         /// <returns> PromotionModel_Id, VehicleType_Id,[Name],Office_Name,[StartDate],[EndDate],[PercentReduc],[FixedReduc</returns>
         public static DataTable GetPromoByOffice(string officeName)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@officeName", officeName);
 
                 try
@@ -33,18 +33,18 @@ namespace DAL
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -59,12 +59,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
 
 
@@ -76,11 +76,11 @@ namespace DAL
         /// <returns>ALL =  PromotionModel_Id, VehicleType_Id,[Name],Office_Name,[StartDate],[EndDate],[PercentReduc],[FixedReduc</returns>
         public static DataTable GetPromoByVehicle(int cstmrId)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@vehicleTypeId", cstmrId);
 
                 try
@@ -91,18 +91,18 @@ namespace DAL
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -117,12 +117,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
     }
 }

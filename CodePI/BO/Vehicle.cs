@@ -7,7 +7,16 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-      public class VehicleType
+    public class FilterOptions
+    {
+        public List<string> lstOffices { get; set; }
+        public List<string> lstMakes { get; set; }
+        public List<string> lstCC { get; set; }
+        public List<string> lstFuels { get; set; }
+        public List<byte> lstDoors { get; set; }
+    }
+
+    public class VehicleType
     {
         public int Id { get; set; }
         public string MakeName { get; set; }

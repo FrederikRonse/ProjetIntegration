@@ -30,39 +30,81 @@ namespace DAL
             public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
         }
 
+
         /// <summary>
-        /// retourne un véhicule par son ID.
+        /// Retourne les options de filtres possibles pour la sélection d'un véhicule
+        /// , pour toute la flotte.
         /// </summary>
-        /// <param name="vehicle_Id"></param>
         /// <returns></returns>
-        public static DataTable GetVehicleById(int vehicle_Id)
+        public static DataSet GetFilterOptions()
         {
-            DataTable dataToReturn = null;
+            using (DataSet _dataToReturn = new DataSet("filterData"))
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
-                SqlParameter param1 = new SqlParameter("@id", vehicle_Id);
+                StringBuilder _sLog = new StringBuilder();
                 try
                 {
-                    using (SqlCommand command = new SqlCommand("SchCommon.GetVehicleById", connection))
+                    using (SqlCommand command = new SqlCommand("SchCommon.GetOfficeList", connection))
                     {
-                        DataTable dataTemp = new DataTable();
+                        DataTable OfficeList = new DataTable();
+                        DataTable MakeList = new DataTable();
+                        DataTable CCList = new DataTable();
+                        DataTable FuelList = new DataTable();
+                        DataTable DoorsList = new DataTable();
+
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.Add(param1);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        
+                        //datadapt.TableMappings.Add("Table", "OfficeList");
+                        //datadapt.TableMappings.Add("Table1", "MakeList");
+                        //datadapt.TableMappings.Add("Table2", "CCList");
+                        //datadapt.TableMappings.Add("Table3", "FuelList");
+                        //datadapt.TableMappings.Add("Table4", "DoorsList");
+
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
-                        datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _sLog.Append("Fill");
+                        datadapt.Fill(OfficeList);
+                        _dataToReturn.Tables.Add(OfficeList);
+
+                        command.CommandText = "SchCommon.GetMakeList";
+                        datadapt.SelectCommand = command;
+                        _sLog.Append("Fill");
+                        datadapt.Fill(MakeList);
+                        _dataToReturn.Tables.Add(MakeList);
+
+                        command.CommandText = "SchCommon.GetCCList";
+                        datadapt.SelectCommand = command;
+                        _sLog.Append("Fill");
+                        datadapt.Fill(CCList);
+                        _dataToReturn.Tables.Add(CCList);
+
+                        command.CommandText = "SchCommon.GetFuelList";
+                        datadapt.SelectCommand = command;
+                        _sLog.Append("Fill");
+                        datadapt.Fill(FuelList);
+                        _dataToReturn.Tables.Add(FuelList);
+
+                        command.CommandText = "SchCommon.GetDoorsList";
+                        datadapt.SelectCommand = command;
+                        _sLog.Append("Fill");
+                        datadapt.Fill(DoorsList);
+                        _dataToReturn.Tables.Add(DoorsList);
+
+
+                        _dataToReturn.Tables[0].TableName = "OfficeList";
+                        _dataToReturn.Tables[1].TableName = "MakeList";
+                        _dataToReturn.Tables[2].TableName =  "CCList";
+                        _dataToReturn.Tables[3].TableName =  "FuelList";
+                        _dataToReturn.Tables[4].TableName =  "DoorsList";
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -77,12 +119,67 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
+                    throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
+                }
+                #endregion Catch
+                return _dataToReturn;
+            }
+        }
+
+        /// <summary>
+        /// retourne un véhicule par son ID.
+        /// </summary>
+        /// <param name="vehicle_Id"></param>
+        /// <returns></returns>
+        public static DataTable GetVehicleById(int vehicle_Id)
+        {
+            DataTable __dataToReturn = null;
+
+            using (SqlConnection connection = UtilsDAL.GetConnection())
+            {
+                StringBuilder __sLog = new StringBuilder();
+                SqlParameter _param1 = new SqlParameter("@id", vehicle_Id);
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("SchCommon.GetVehicleById", connection))
+                    {
+                        DataTable dataTemp = new DataTable();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add(_param1);
+                        SqlDataAdapter datadapt = new SqlDataAdapter(command);
+                        __sLog.Append("Open");
+                        connection.Open();
+                        datadapt.SelectCommand = command;
+                        __sLog.Append("Fill");
+                        datadapt.Fill(dataTemp);
+                        __dataToReturn = dataTemp;
+                    }
+                }
+                #region Catch
+                catch (SqlException sqlEx)
+                {
+                    sqlEx.Data.Add("Log", __sLog);
+
+                    switch (sqlEx.Number)
+                    {
+                        case 4060:
+                            throw new CstmEx(ExType.badDB, sqlEx); //"Mauvaise base de données"
+                        case 18456:
+                            throw new CstmEx(ExType.badPWD, sqlEx); //"Mauvais mot de passe"
+
+                        default:
+                            throw new CstmEx(ExType.notHandledSql, sqlEx); //"Erreur SQL non traitée !" L'exception sera rError_Layerancée.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Data.Add("Log", __sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return __dataToReturn;
         }
 
         /// <summary>
@@ -92,11 +189,11 @@ namespace DAL
         /// <returns></returns>
         public static DataTable GetPics(int vehicleType_Id)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@VehicleType_Id", vehicleType_Id);
                 try
                 {
@@ -106,18 +203,18 @@ namespace DAL
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -132,13 +229,15 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
+
+    
 
         /// <summary>
         /// retourne une instance de chaque types de véhicules
@@ -148,11 +247,11 @@ namespace DAL
         /// <returns></returns>
         public static DataTable GetVehiclesByFilter(VehicleFilters vFilters)
         {
-            DataTable dataToReturn = null;
+            DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@startDate", vFilters.StartDate);
                 SqlParameter param2 = new SqlParameter("@endtDate", vFilters.EndDate);
                 SqlParameter param3 = new SqlParameter("@officeName", vFilters.OfficeName);
@@ -168,18 +267,18 @@ namespace DAL
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
                         datadapt.SelectCommand = command;
-                        sLog.Append("Fill");
+                        _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
-                        dataToReturn = dataTemp;
+                        _dataToReturn = dataTemp;
                     }
                 }
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -194,12 +293,12 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
                 }
                 #endregion Catch
             }
-            return dataToReturn;
+            return _dataToReturn;
         }
 
         /// <summary>
@@ -213,7 +312,7 @@ namespace DAL
         {
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
-                StringBuilder sLog = new StringBuilder();
+                StringBuilder _sLog = new StringBuilder();
                 SqlParameter param0 = new SqlParameter("@new_ID", SqlDbType.Int, 0); // 0 en output par défaut.
                 param0.Direction = System.Data.ParameterDirection.Output;
                 SqlParameter param1 = new SqlParameter("@vehicleType_Id", vehicleType_Id);
@@ -225,9 +324,9 @@ namespace DAL
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
-                        sLog.Append("Open");
+                        _sLog.Append("Open");
                         connection.Open();
-                        sLog.Append("ExecuteNonQuery");
+                        _sLog.Append("ExecuteNonQuery");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected == 0) throw new CstmEx(ExType.dtaWrite);     // La création a échoué. 
                         if (rowsAffected > 1) throw new CstmEx(ExType.sqlLineCount);  // nbre de lignes affectées erroné.
@@ -238,7 +337,7 @@ namespace DAL
                 #region Catch
                 catch (SqlException sqlEx)
                 {
-                    sqlEx.Data.Add("Log", sLog);
+                    sqlEx.Data.Add("Log", _sLog);
 
                     switch (sqlEx.Number)
                     {
@@ -253,7 +352,7 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    ex.Data.Add("Log", sLog);
+                    ex.Data.Add("Log", _sLog);
                     throw new CstmEx(ExType.dtaWrite, ex);
                 }
                 #endregion Catch
