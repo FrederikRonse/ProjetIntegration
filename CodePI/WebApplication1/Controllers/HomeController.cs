@@ -32,12 +32,27 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        /// <summary>
+        /// Test
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult SetOfficeFilter(string officeName)
         {
 
-            ViewBag.Message = "page \"contact\"";
+            try
+            {
+                BL.BLVehicle _bLVehicle = new BL.BLVehicle();
+                BO.FilterOptions _filterOptions = _bLVehicle.GetFilterOptions();
+                Session["lstMakes"] = new SelectList(_filterOptions.lstFuels);
 
-            return View();
+                return Json(new { result = "OK", makeOptions = _filterOptions.lstFuels }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw new NotImplementedException();
+
+            }
         }
     }
 }
