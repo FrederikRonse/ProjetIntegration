@@ -257,13 +257,13 @@
                 datatype: 'json',
                 url: '@Url.Action("SetOfficeFilter", "Home")',
                 data: {
-                    officeName: $('#officeFilter').text() // PAs bon, renvoie tout au lieu de l'élément selectionné.
+                    officeName: $('#officeFilter').val() 
                 }, dataType: "html"
             })
             .done(
-                function () {
+                function (result) {
                     $("#MakeFilter").empty();
-                    $.each(ddResult, function (k, v) {
+                    $.each(result, function (k, v) {
                         $('#MakeFilter').append('<option value="' + v.Name + '">' + v.Name + '</option>');
 
                     })
