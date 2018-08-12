@@ -13,46 +13,24 @@ namespace WebApplication1.Controllers
         {
             if (Session["lstOffices"] == null)
             {
-                BL.BLVehicle _bLVehicle = new BL.BLVehicle();
-                BO.FilterOptions _filterOptions = _bLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
-                _filterOptions.lstOffices.Remove("AirCar Belgium");
-                Session["lstOffices"] = new SelectList(_filterOptions.lstOffices);
-                Session["lstMakes"] = new SelectList(_filterOptions.lstMakes);
-                Session["lstFuels"] = new SelectList(_filterOptions.lstFuels);
-                Session["lstDoors"] = new SelectList(_filterOptions.lstDoors);
+                SetFilters();
             }
-            return View();
-        }
-
-        public ActionResult About()
-        {
-
-            ViewBag.Message = "";
-
             return View();
         }
 
         /// <summary>
-        /// Test
+        /// Mets à jour la liste des filtres dans le viewbag.
         /// </summary>
-        /// <returns></returns>
-        public JsonResult SetOfficeFilter(string officeName)
+        public void SetFilters()
         {
+            BL.BLVehicle _bLVehicle = new BL.BLVehicle();
+            BO.FilterOptions _filterOptions = _bLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
+            if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
 
-            try
-            {
-                BL.BLVehicle _bLVehicle = new BL.BLVehicle();
-                BO.FilterOptions _filterOptions = _bLVehicle.GetFilterOptions();
-                Session["lstMakes"] = new SelectList(_filterOptions.lstFuels);
-
-                return Json(new { result = "OK", makeOptions = _filterOptions.lstFuels }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-
-                throw new NotImplementedException();
-
-            }
+            Session["lstOffices"] = new SelectList(_filterOptions.lstOffices);
+            Session["lstMakes"] = new SelectList(_filterOptions.lstMakes);
+            Session["lstFuels"] = new SelectList(_filterOptions.lstFuels);
+            Session["lstDoors"] = new SelectList(_filterOptions.lstDoors);
         }
     }
 }
