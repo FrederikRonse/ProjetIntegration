@@ -1,32 +1,28 @@
-﻿@model  WebApplication1.Models.View_Models.VMvehicleFilters 
-
-@{
-    ViewBag.Title = "Home Page";
-}
+﻿
+@model BO.FilterOptions
 
 <div class="py-5">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                @using (Html.BeginForm("FilterVehicles", "Vehicle", FormMethod.Get))
+                @using (Html.BeginForm("Add", "Home", FormMethod.Post))
                 {
-                <div class="form-group">
-                    <label>Pick-up Place</label>
-                    @Html.DropDownListFor(x => x.LstOffices, Model.LstOffices, "Select the pick-up place", new { @class = "form-control" })
-                    @* @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control" })  @*new { @class = "form-control", onchange = "this.form.submit();" })*@
-                </div>
-                @*<div class="form-group">
-                    <label>Make</label>
-                    @Html.DropDownListFor(x => x.lstMakes, new SelectList(Model.lstMakes), "Select the make", new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Fuel Type</label>
-                    @Html.DropDownListFor(x => x.lstFuels, new SelectList(Model.lstFuels), "Select the fuel type", new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Number of Doors</label>
-                    @Html.DropDownListFor(x => x.lstDoors, new SelectList(Model.lstDoors), "Select the number of doors", new { @class = "form-control" })
-                </div>*@
+                    <div class="form-group">
+                        <label>Pick-up Place</label>
+                        @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control" })  @*new { @class = "form-control", onchange = "this.form.submit();" })*@
+                    </div>
+                    <div class="form-group">
+                        <label>Make</label>
+                        @Html.DropDownList("makeFilter", (SelectList)Session["lstMakes"], "Select the make", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Fuel Type</label>
+                        @Html.DropDownList("fuelFilter", (SelectList)Session["lstFuels"], "Select the fuel type", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Doors</label>
+                        @Html.DropDownList("doorsFilter", (SelectList)Session["lstDoors"], "Select the number of doors", new { @class = "form-control" })
+                    </div>
 
                     <button type="submit" class="btn btn-primary my-3">Search</button>
                 }
@@ -71,9 +67,3 @@
     </div>
 </div>
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jquery")
-
-
-}
