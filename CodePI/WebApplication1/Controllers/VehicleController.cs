@@ -16,6 +16,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Mets à jour les filtres pour dropdowns selection dans Session["filters"].
+        /// Les objets "slctdXXXX" en session ne sont pas utilisés pour le moment.
+        /// </summary>
+        /// <param name="filterOptions"></param>
         [HttpGet]
         public void FilterVehicles(BO.FilterOptions  filterOptions) 
         {
