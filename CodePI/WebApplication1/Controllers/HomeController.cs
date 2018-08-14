@@ -55,28 +55,28 @@ namespace WebApplication1.Controllers
         /// <param name="selectedOptions"></param>
         public void UpdateFilters(BO.FilterOptions selectedOptions)
         {
-            if (selectedOptions.lstOffices != null)
+            if (selectedOptions.lstOffices != null && selectedOptions.lstOffices[0] != "")
             {
                 Session["slctdOffice"] = selectedOptions.lstOffices[0];
                 SelectList UpdatedLstOffices = new SelectList(((VMvehicleFilters)Session["filters"]).LstOffices, selectedOptions.lstOffices[0]);
                 ((VMvehicleFilters)Session["filters"]).LstOffices = UpdatedLstOffices;
                 _filters.LstOffices = UpdatedLstOffices;
             }
-            if (selectedOptions.lstMakes != null)
+            if (selectedOptions.lstMakes != null && selectedOptions.lstMakes[0] != "")
             {
                 Session["slctdMake"] = selectedOptions.lstMakes[0];
                 SelectList UpdatedlstMakes = new SelectList(((VMvehicleFilters)Session["filters"]).LstMakes, selectedOptions.lstMakes[0]);
                 ((VMvehicleFilters)Session["filters"]).LstMakes = UpdatedlstMakes;
                 _filters.LstMakes = UpdatedlstMakes;
             }
-            if (selectedOptions.lstFuels != null)
+            if (selectedOptions.lstFuels != null && selectedOptions.lstFuels[0] != "")
             {
                 Session["slctdFuel"] = selectedOptions.lstFuels[0];
                 SelectList UpdatedlstFuels = new SelectList(((VMvehicleFilters)Session["filters"]).LstFuels, selectedOptions.lstFuels[0]);
                 ((VMvehicleFilters)Session["filters"]).LstFuels = UpdatedlstFuels;
                 _filters.LstFuels = UpdatedlstFuels;
             }
-            if (selectedOptions.lstDoors != null)
+            if (selectedOptions.lstCC != null && selectedOptions.lstCC[0] != "")
             {
                 Session["slctdDoors"] = selectedOptions.lstDoors[0];
                 SelectList UpdatedlstDoors = new SelectList(((VMvehicleFilters)Session["filters"]).LstDoors, selectedOptions.lstDoors[0]);

@@ -45,6 +45,7 @@ namespace BO
     public class Picture
     {
         public int Id { get; set; }
+        public string Path { get; set; }
         public int VehicleTypeId { get; set; }
         public string Label { get; set; }
         public bool? IsLarge { get; set; }

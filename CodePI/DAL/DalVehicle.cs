@@ -64,7 +64,6 @@ namespace DAL
 
                         _sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;
                         _sLog.Append("Fill");
                         datadapt.Fill(OfficeList);
                         _dataToReturn.Tables.Add(OfficeList);
@@ -150,7 +149,6 @@ namespace DAL
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         __sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;
                         __sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
                         __dataToReturn = dataTemp;
@@ -205,7 +203,6 @@ namespace DAL
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         _sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;
                         _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
                         _dataToReturn = dataTemp;
@@ -269,7 +266,6 @@ namespace DAL
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         _sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;
                         _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
                         _dataToReturn = dataTemp;

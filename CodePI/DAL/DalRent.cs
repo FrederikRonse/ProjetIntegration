@@ -35,7 +35,6 @@ namespace DAL
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         _sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;
                         _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
                         _dataToReturn = dataTemp;
@@ -95,7 +94,6 @@ namespace DAL
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         _sLog.Append("Open");
                         connection.Open();
-                        datadapt.SelectCommand = command;  
                         _sLog.Append("Fill");
                         datadapt.Fill(dataTemp);
                         _dataToReturn = dataTemp;
