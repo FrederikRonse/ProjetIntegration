@@ -38,7 +38,7 @@ namespace WebApplication1.Controllers
 
             if (Session["filters"] == null)
             {
-               // BL.BLVehicle _bLVehicle = new BL.BLVehicle();
+                // BL.BLVehicle _bLVehicle = new BL.BLVehicle();
                 _filterOptions = BL.BLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
                 if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
 
@@ -95,9 +95,9 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="filterOptions"></param>
         /// <returns></returns>
-        static public BL.BLVehicle.Vehiclefilter GetSlctdFilters(BO.FilterOptions filterOptions)
+        static public BO.SlctdFilters GetSlctdFilters(BO.FilterOptions filterOptions)
         {
-            BL.BLVehicle.Vehiclefilter _vehiclefilter = new BL.BLVehicle.Vehiclefilter();
+            BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();
             if (filterOptions.lstOffices != null && filterOptions.lstOffices[0] != "")
             {
                 _vehiclefilter.OfficeName = filterOptions.lstOffices[0];
@@ -110,7 +110,7 @@ namespace WebApplication1.Controllers
             {
                 _vehiclefilter.FuelName = filterOptions.lstFuels[0];
             }
-            if (filterOptions.lstCC != null && filterOptions.lstCC[0] != "")
+            if (filterOptions.lstDoors != null && filterOptions.lstDoors[0] != 0)
             {
                 _vehiclefilter.DoorsCount = filterOptions.lstDoors[0];
             }
@@ -128,9 +128,9 @@ namespace WebApplication1.Controllers
         {
             SetFilterOptions(filterOptions);
 
-            BL.BLVehicle.Vehiclefilter _vehiclefilter = GetSlctdFilters(filterOptions);
+            BO.SlctdFilters _vehiclefilter = GetSlctdFilters(filterOptions);
             TempData["vehiclefilter"] = _vehiclefilter; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
-            return RedirectToAction("GetVehiclesByFilter", "Vehicle" ); //  , new { slctdFilter = }
+            return RedirectToAction("GetVehiclesByFilter", "Vehicle"); //  , new { slctdFilter = }
         }
 
     }

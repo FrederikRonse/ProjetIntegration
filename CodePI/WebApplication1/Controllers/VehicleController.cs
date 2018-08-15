@@ -17,16 +17,18 @@ namespace WebApplication1.Controllers
         {
             if (string.IsNullOrEmpty(Session["slctdOffice"].ToString()) == false)
             {
-                BL.BLVehicle.Vehiclefilter _vehiclefilter = new BL.BLVehicle.Vehiclefilter();
+                BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();
                 _vehiclefilter.OfficeName = Session["slctdOffice"].ToString();
+                GetVehiclesByFilter(_vehiclefilter);
+            //    return View(BL.BLVehicle.GetVehicleByFilter(_vehiclefilter));
             }
-
             return View();
+
         }
 
         // GET: Vehicle
         [HttpGet]
-        public ActionResult GetVehiclesByFilter(BL.BLVehicle.Vehiclefilter slctdFilter = null, bool withPics = true)
+        public ActionResult GetVehiclesByFilter(BO.SlctdFilters slctdFilter = null, bool withPics = true)
         {
           //  if (slctdFilter == null)
             return View(BL.BLVehicle.GetVehicleByFilter(slctdFilter, withPics));

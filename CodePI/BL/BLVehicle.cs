@@ -186,12 +186,20 @@ namespace BL
         /// <param name="vehicleFilters"></param>
         /// <param name="withPics"></param>
         /// <returns></returns>
-        public static List<VehicleDetails> GetVehicleByFilter(Vehiclefilter vehicleFilters, bool withPics = true)
+        public static List<VehicleDetails> GetVehicleByFilter(SlctdFilters vehicleFilters, bool withPics = true)
         {
             List<VehicleDetails> _vehicleToReturn = new List<VehicleDetails>();
             try
             {
-                DataTable _table = DalVehicle.GetVehiclesByFilter((DalVehicle.VehicleFilters)vehicleFilters);
+                DalVehicle.VehicleFilters _vehicleFilters = new DalVehicle.VehicleFilters();
+                _vehicleFilters.StartDate = vehicleFilters.StartDate;
+                _vehicleFilters.EndDate = vehicleFilters.EndDate;
+                _vehicleFilters.OfficeName = vehicleFilters.OfficeName;
+                _vehicleFilters.MakeName = vehicleFilters.MakeName;
+                _vehicleFilters.FuelName = vehicleFilters.FuelName;
+                _vehicleFilters.DoorsCount = vehicleFilters.DoorsCount;
+
+                DataTable _table = DalVehicle.GetVehiclesByFilter(_vehicleFilters);
                 if (_table != null)
                 {
                     if (_table.Rows.Count != 0)

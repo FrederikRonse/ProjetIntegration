@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+
     public class FilterOptions
     {
         public List<string> lstOffices { get; set; }
@@ -15,6 +16,16 @@ namespace BO
         public List<string> lstFuels { get; set; }
         public List<byte> lstDoors { get; set; }
     }
+
+    public class SlctdFilters
+    {
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string OfficeName { get; set; }
+        public string MakeName { get; set; }
+        public string FuelName {get; set; }
+        public byte DoorsCount {get; set; }
+    } 
 
     public class VehicleType
     {
