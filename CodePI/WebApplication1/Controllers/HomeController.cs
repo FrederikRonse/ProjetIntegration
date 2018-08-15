@@ -41,8 +41,6 @@ namespace WebApplication1.Controllers
                 // BL.BLVehicle _bLVehicle = new BL.BLVehicle();
                 _filterOptions = BL.BLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
                 if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
-
-
                 _filters.LstOffices = new SelectList(_filterOptions.lstOffices);
                 _filters.LstMakes = new SelectList(_filterOptions.lstMakes);
                 _filters.LstFuels = new SelectList(_filterOptions.lstFuels);
@@ -95,7 +93,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="filterOptions"></param>
         /// <returns></returns>
-        static public BO.SlctdFilters GetSlctdFilters(BO.FilterOptions filterOptions)
+         public static BO.SlctdFilters GetSlctdFilters(BO.FilterOptions filterOptions)
         {
             BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();
             if (filterOptions.lstOffices != null && filterOptions.lstOffices[0] != "")
@@ -130,7 +128,7 @@ namespace WebApplication1.Controllers
 
             BO.SlctdFilters _vehiclefilter = GetSlctdFilters(filterOptions);
             TempData["vehiclefilter"] = _vehiclefilter; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
-            return RedirectToAction("GetVehiclesByFilter", "Vehicle"); //  , new { slctdFilter = }
+            return RedirectToAction("GetVehiclesByFilter", "Vehicles"); //  , new { slctdFilter = }
         }
 
     }

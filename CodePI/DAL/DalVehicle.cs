@@ -239,6 +239,7 @@ namespace DAL
         /// <summary>
         /// retourne une instance de chaque types de véhicules
         /// correspondant aux filtres.
+        /// Datetime.now si pas de dates fournies.
         /// </summary>
         /// <param name="vFilters"></param>
         /// <returns></returns>
@@ -249,8 +250,8 @@ namespace DAL
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
                 StringBuilder _sLog = new StringBuilder();
-                SqlParameter param1 = new SqlParameter("@startDate", vFilters.StartDate);
-                SqlParameter param2 = new SqlParameter("@endtDate", vFilters.EndDate);
+                SqlParameter param1 = new SqlParameter("@startDate",  vFilters.StartDate == DateTime.MinValue ?   DateTime.Now : vFilters.StartDate);
+                SqlParameter param2 = new SqlParameter("@endtDate", vFilters.EndDate == DateTime.MinValue ? DateTime.Now : vFilters.EndDate);
                 SqlParameter param3 = new SqlParameter("@officeName", vFilters.OfficeName);
                 SqlParameter param4 = new SqlParameter("@makeName", vFilters.MakeName);
                 SqlParameter param5 = new SqlParameter("@fuelName", vFilters.FuelName);
