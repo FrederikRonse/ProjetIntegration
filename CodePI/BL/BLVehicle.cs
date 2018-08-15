@@ -32,7 +32,7 @@ namespace BL
         /// Retourne les filtres possibles pour la selection des véhicules.
         /// </summary>
         /// <returns></returns>
-        public FilterOptions GetFilterOptions()
+        public static FilterOptions GetFilterOptions()
         {
             FilterOptions _filterToReturn = new FilterOptions();
             try
@@ -91,7 +91,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public VehicleShort GetVehicleShort(int id)
+        public static VehicleShort GetVehicleShort(int id)
         {
             VehicleShort _vehicleToReturn = new VehicleShort();
             try
@@ -131,7 +131,7 @@ namespace BL
         /// <param name="id"></param>
         /// <param name="withPics"></param>
         /// <returns></returns>
-        public VehicleDetails GetVehicle(int id, bool withPics = true)
+        public static VehicleDetails GetVehicle(int id, bool withPics = true)
         {
             VehicleDetails _vehicleToReturn = new VehicleDetails();
             try
@@ -186,7 +186,7 @@ namespace BL
         /// <param name="vehicleFilters"></param>
         /// <param name="withPics"></param>
         /// <returns></returns>
-        public List<VehicleDetails> GetVehicleByFilter(Vehiclefilter vehicleFilters, bool withPics = true)
+        public static List<VehicleDetails> GetVehicleByFilter(Vehiclefilter vehicleFilters, bool withPics = true)
         {
             List<VehicleDetails> _vehicleToReturn = new List<VehicleDetails>();
             try
@@ -241,7 +241,7 @@ namespace BL
         /// </summary>
         /// <param name="vehicleTypeId"></param>
         /// <returns></returns>
-        public List<Picture> Getpics(int vehicleTypeId)
+        public static List<Picture> Getpics(int vehicleTypeId)
         {
             List<Picture> _pics = new List<Picture>();
             try

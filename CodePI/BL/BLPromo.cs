@@ -8,7 +8,7 @@ using static EL.CstmEx;
 
 namespace BL
 {
-    public class BLPromo
+    public static class BLPromo
     {
         /// <summary>
         /// Renvoie les promos d'une agence.
@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="officeName"></param>
         /// <returns></returns>
-        public List<Promo> GetPromosByOffice(string officeName)
+        public static List<Promo> GetPromosByOffice(string officeName)
         {
             List<Promo> _promos = new List<Promo>();
             try
@@ -62,7 +62,7 @@ namespace BL
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns></returns>
-        public List<Promo> GetPromosByVehicle(int vehicleId)
+        public static List<Promo> GetPromosByVehicle(int vehicleId)
         {
             List<Promo> _promos = new List<Promo>();
             try

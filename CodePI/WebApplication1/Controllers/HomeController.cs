@@ -13,11 +13,17 @@ namespace WebApplication1.Controllers
         BO.FilterOptions _filterOptions;
         VMvehicleFilters _filters;
 
+        /// <summary>
+        /// Retourne la vue principale,
+        /// filtre de sélection des véhicules et
+        /// carousel.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             if (_filters == null)
             {
-                SetFilters();
+                SetFilterOptions();
             }
             return View(_filters);
         }
@@ -26,14 +32,14 @@ namespace WebApplication1.Controllers
         /// Mets à jour la liste des filtres.
         /// Appelle la fonction d'update si nécessaire.
         /// </summary>
-        public void SetFilters(BO.FilterOptions selectedOptions = null)
+        public void SetFilterOptions(BO.FilterOptions selectedOptions = null)
         {
             _filters = new VMvehicleFilters();
 
             if (Session["filters"] == null)
             {
-                BL.BLVehicle _bLVehicle = new BL.BLVehicle();
-                _filterOptions = _bLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
+               // BL.BLVehicle _bLVehicle = new BL.BLVehicle();
+                _filterOptions = BL.BLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
                 if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
 
 
@@ -45,15 +51,14 @@ namespace WebApplication1.Controllers
                 Session["filters"] = _filters;
             }
             else _filters = Session["filters"] as VMvehicleFilters;
-            if (selectedOptions != null) UpdateFilters(selectedOptions);
+            if (selectedOptions != null) UpdateFilterOptions(selectedOptions);
         }
 
         /// <summary>
         /// Mets à jour les filtres pour dropdowns selection dans Session["filters"].
-        /// Les objets "slctdXXXX" en session ne sont pas utilisés pour le moment.
         /// </summary>
         /// <param name="selectedOptions"></param>
-        public void UpdateFilters(BO.FilterOptions selectedOptions)
+        public void UpdateFilterOptions(BO.FilterOptions selectedOptions)
         {
             if (selectedOptions.lstOffices != null && selectedOptions.lstOffices[0] != "")
             {
@@ -86,16 +91,46 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
+        /// Récupères les options choisies.
+        /// </summary>
+        /// <param name="filterOptions"></param>
+        /// <returns></returns>
+        static public BL.BLVehicle.Vehiclefilter GetSlctdFilters(BO.FilterOptions filterOptions)
+        {
+            BL.BLVehicle.Vehiclefilter _vehiclefilter = new BL.BLVehicle.Vehiclefilter();
+            if (filterOptions.lstOffices != null && filterOptions.lstOffices[0] != "")
+            {
+                _vehiclefilter.OfficeName = filterOptions.lstOffices[0];
+            }
+            if (filterOptions.lstMakes != null && filterOptions.lstMakes[0] != "")
+            {
+                _vehiclefilter.MakeName = filterOptions.lstMakes[0];
+            }
+            if (filterOptions.lstFuels != null && filterOptions.lstFuels[0] != "")
+            {
+                _vehiclefilter.FuelName = filterOptions.lstFuels[0];
+            }
+            if (filterOptions.lstCC != null && filterOptions.lstCC[0] != "")
+            {
+                _vehiclefilter.DoorsCount = filterOptions.lstDoors[0];
+            }
+            return _vehiclefilter;
+        }
+
+        /// <summary>
         /// Rafraîchi la liste d'options en session et 
         /// passe la main au VehicleController pour la 
         /// récupération et affichage des véhicules.
         /// </summary>
         /// <param name="filterOptions"></param>
-        [HttpGet]
-        public void SetVehicles(BO.FilterOptions filterOptions)
+      //  [HttpGet]
+        public ActionResult SetVehicles(BO.FilterOptions filterOptions)
         {
-            SetFilters(filterOptions);
-            RedirectToAction("GetVehicles", "Vehicle", new { filterOptions });
+            SetFilterOptions(filterOptions);
+
+            BL.BLVehicle.Vehiclefilter _vehiclefilter = GetSlctdFilters(filterOptions);
+            TempData["vehiclefilter"] = _vehiclefilter; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
+            return RedirectToAction("GetVehiclesByFilter", "Vehicle" ); //  , new { slctdFilter = }
         }
 
     }

@@ -7,14 +7,14 @@ using static EL.CstmEx;
 
 namespace BL
 {
-    public class BLOffice
+    public static class BLOffice
     {
 
         /// <summary>
         /// Retourne la liste de toutes les agences / emplacements.
         /// </summary>
         /// <returns></returns>
-        public List<Office> GetOffices()
+        public static List<Office> GetOffices()
         {
             List<Office> _officeList = new List<Office>();
             try

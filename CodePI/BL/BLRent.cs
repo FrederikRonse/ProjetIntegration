@@ -8,7 +8,7 @@ using static EL.CstmEx;
 
 namespace BL
 {
-    public class BLRent
+    public static class BLRent
     {
         /// <summary>
         /// Retourne une réservation par son ID.
@@ -16,7 +16,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Rent GetRent(int id)
+        public static Rent GetRent(int id)
         {
             Rent _rent = new Rent();
             try
@@ -69,7 +69,7 @@ namespace BL
         /// </summary>
         /// <param name="cstmrId"></param>
         /// <returns></returns>
-        public List<Rent> GetRentByCstmr(int cstmrId, bool isClosed)
+        public static List<Rent> GetRentByCstmr(int cstmrId, bool isClosed)
         {
             List<Rent> _rents = new List<Rent>();
             try
@@ -124,7 +124,7 @@ namespace BL
         /// Création d'une réservation.
         /// </summary>
         /// <param name="newRent"></param>
-        public void CreateRent(Rent newRent)
+        public static void CreateRent(Rent newRent)
         {
             if (newRent == null)
             {
@@ -151,7 +151,7 @@ namespace BL
         /// update / clôture d'une réservation.
         /// </summary>
         /// <param name="rentToUpdate"></param>
-        public void UpdteRent(Rent rentToUpdate)
+        public static void UpdteRent(Rent rentToUpdate)
         {
             if (rentToUpdate == null)
             {

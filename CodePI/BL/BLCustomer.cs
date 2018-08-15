@@ -7,14 +7,14 @@ using static EL.CstmEx;
 
 namespace BL
 {
-    public class BLCustomer
+    public static class BLCustomer
     {
         /// <summary>
         /// Renvoie les détails d'un client par son ID.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Customer GetCustomer(int id)
+        public static Customer GetCustomer(int id)
         {
             Customer _customer = new Customer();
             try
@@ -55,7 +55,7 @@ namespace BL
         /// Création d'un client.
         /// </summary>
         /// <param name="newCstmr"></param>
-        public void CreateCstmr(Customer newCstmr)
+        public static void CreateCstmr(Customer newCstmr)
         {
             if (newCstmr == null)
             {
@@ -82,7 +82,7 @@ namespace BL
         /// Mise à jour d'un client.
         /// </summary>
         /// <param name="Cstmr"></param>
-        public void UpdteCstmr(Customer Cstmr)
+        public static void UpdteCstmr(Customer Cstmr)
         {
             if (Cstmr == null)
             {
