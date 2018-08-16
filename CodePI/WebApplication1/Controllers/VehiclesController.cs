@@ -42,7 +42,7 @@ namespace WebApplication1.Controllers
             }
             else _vehiclefilter.OfficeName = officeName;
             TempData["vehiclefilter"] = _vehiclefilter;
-            return View(GetVehiclesByFilter( ));
+            return View(GetVehiclesByFilter());
         }
 
         /// <summary>
@@ -53,8 +53,52 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetVehiclesByFilter()
         {
+            List<VMvehicle> _vMvehicles = new List<VMvehicle>();
+
             BO.SlctdFilters _slctdFilter = TempData["vehiclefilter"] as BO.SlctdFilters;
-            return View(BL.BLVehicle.GetVehicleByFilter(_slctdFilter));
+            List<BO.VehicleDetails> _result = BL.BLVehicle.GetVehicleByFilter(_slctdFilter);
+
+            if (_result.Count != 0)
+            {
+                foreach (BO.VehicleDetails item in _result)
+                {
+                    VMvehicle _vMvehicle = new VMvehicle();
+                    _vMvehicle.Id = item.VehicleId;
+                    _vMvehicle.MakeName = item.VehicleType.MakeName;
+                    _vMvehicle.ModelName = item.VehicleType.ModelName;
+                    _vMvehicle.DailyPrice = (int)item.DailyPrice;
+                    _vMvehicle.Ndays = (byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days;
+                    _vMvehicle.PromoTotal = GetTotalPromo();
+                    _vMvehicle.PriceToPay = _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal >= 0 ?
+                                            _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal : 0; // Pas de prix négatif (0= gratuit).
+                    _vMvehicle.CCName = item.VehicleType.CCName;
+                    _vMvehicle.DoorsCount = item.VehicleType.DoorsCount;
+                    _vMvehicle.FuelName = item.VehicleType.FuelName;
+
+                    //calcul du total des promos pour chaque véhicule.
+                    int GetTotalPromo()
+                    {
+                        int _promoTotal = 0;
+                        List<BO.Promo> _promos = BL.BLPromo.GetPromosByVehicle(item.VehicleId);
+                        if (_promos.Count != 0)
+                        {
+                            byte _totalPercentReduc = 0;
+                            int _totalCashReduc = 0;
+                            foreach (BO.Promo promo in _promos)
+                            {
+                                byte _currentPcReduc = _totalPercentReduc;
+                                if (promo.PercentReduc != null) _currentPcReduc += (byte)promo.PercentReduc;
+                                if (_currentPcReduc < 100) _totalPercentReduc = _currentPcReduc; // max 100% de réduction.
+                                if (promo.FixedReduc != null) _totalCashReduc += (int)promo.FixedReduc;
+                            }
+                            _promoTotal = (_vMvehicle.DailyPrice * _vMvehicle.Ndays) * _totalPercentReduc / 100 + _totalCashReduc;
+                        }
+                        return _promoTotal;
+                    }
+
+                }
+            }
+            return View("VehicleSelection");
         }
 
         // GET: Vehicle

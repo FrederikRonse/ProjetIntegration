@@ -71,16 +71,16 @@ namespace DAL
         /// Récupération des promos liées à un type véhicule.
         /// pour clients et employés.
         /// </summary>
-        /// <param name="cstmrId"></param>
+        /// <param name="vehicleTypeId"></param>
         /// <returns>ALL =  PromotionModel_Id, VehicleType_Id,[Name],Office_Name,[StartDate],[EndDate],[PercentReduc],[FixedReduc</returns>
-        public static DataTable GetPromoByVehicle(int cstmrId)
+        public static DataTable GetPromoByVehicle(int vehicleTypeId)
         {
             DataTable _dataToReturn = null;
 
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
                 StringBuilder _sLog = new StringBuilder();
-                SqlParameter param1 = new SqlParameter("@vehicleTypeId", cstmrId);
+                SqlParameter param1 = new SqlParameter("@vehicleTypeId", vehicleTypeId);
 
                 try
                 {

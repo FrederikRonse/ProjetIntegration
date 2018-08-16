@@ -17,15 +17,27 @@ namespace WebApplication1.Models.View_Models
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
         public int Id { get; set; }
+        [Display(Name = "Make")]
         public string MakeName { get; set; }
+        [Display(Name = "Model")]
         public string ModelName { get; set; }
+        [Display(Name = "Daily Price")]
         public int DailyPrice { get; set; }
+        [Display(Name = "Duration")]
         public byte Ndays { get; set; }
-        public int Promo { get; set; }
+        [Display(Name = "Reduction")]
+        public int PromoTotal { get; set; }
+        [Display(Name = "Price")]
+        public int PriceToPay { get; set; }
+        [Display(Name = "Number of Doors")]
         public byte DoorsCount { get; set; }
+        [Display(Name = "Type of Fuel")]
         public string FuelName { get; set; }
+        [Display(Name = "Engine")]
         public string CCName { get; set; }
+        [ScaffoldColumn(false)]
         public string PicPath { get; set; }
+        [ScaffoldColumn(false)]
         public string PicLabel { get; set; }
     }
 }
