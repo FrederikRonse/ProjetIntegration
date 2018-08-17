@@ -192,7 +192,7 @@ namespace DAL
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
                 StringBuilder _sLog = new StringBuilder();
-                SqlParameter param1 = new SqlParameter("@VehicleType_Id", vehicleType_Id);
+                SqlParameter param1 = new SqlParameter("@VehicleTypeId", vehicleType_Id);
                 try
                 {
                     using (SqlCommand command = new SqlCommand("SchCommon.GetPictures", connection))
@@ -233,8 +233,6 @@ namespace DAL
             }
             return _dataToReturn;
         }
-
-    
 
         /// <summary>
         /// retourne une instance de chaque types de véhicules

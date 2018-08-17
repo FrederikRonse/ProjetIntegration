@@ -73,7 +73,7 @@ namespace DAL
         /// </summary>
         /// <param name="vehicleTypeId"></param>
         /// <returns>ALL =  PromotionModel_Id, VehicleType_Id,[Name],Office_Name,[StartDate],[EndDate],[PercentReduc],[FixedReduc</returns>
-        public static DataTable GetPromoByVehicle(int vehicleTypeId)
+        public static DataTable GetPromoByVehicle(int vehicleTypeId, string officeName)
         {
             DataTable _dataToReturn = null;
 
@@ -81,6 +81,7 @@ namespace DAL
             {
                 StringBuilder _sLog = new StringBuilder();
                 SqlParameter param1 = new SqlParameter("@vehicleTypeId", vehicleTypeId);
+                SqlParameter param2 = new SqlParameter("@officeName", officeName);
 
                 try
                 {
@@ -89,6 +90,7 @@ namespace DAL
                         DataTable dataTemp = new DataTable();
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(param1);
+                        command.Parameters.Add(param2);
                         SqlDataAdapter datadapt = new SqlDataAdapter(command);
                         _sLog.Append("Open");
                         connection.Open();

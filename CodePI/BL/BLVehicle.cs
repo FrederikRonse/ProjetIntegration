@@ -18,15 +18,15 @@ namespace BL
         /// Permet de passer les filtres de selection
         /// entre la partie web et la dal.
         /// </summary>
-        public class Vehiclefilter : DalVehicle.VehicleFilters
-        {
-            public DateTime StartDate { get => _startDate; set => _startDate = value; }
-            public DateTime EndDate { get => _endDate; set => _endDate = value; }
-            public string OfficeName { get => _officeName; set => _officeName = value; }
-            public string MakeName { get => _makeName; set => _makeName = value; }
-            public string FuelName { get => _fuelName; set => _fuelName = value; }
-            public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
-        }
+        //public class Vehiclefilter : DalVehicle.VehicleFilters
+        //{
+        //    public DateTime StartDate { get => _startDate; set => _startDate = value; }
+        //    public DateTime EndDate { get => _endDate; set => _endDate = value; }
+        //    public string OfficeName { get => _officeName; set => _officeName = value; }
+        //    public string MakeName { get => _makeName; set => _makeName = value; }
+        //    public string FuelName { get => _fuelName; set => _fuelName = value; }
+        //    public byte DoorsCount { get => _doorsCount; set => _doorsCount = value; }
+        //}
 
         /// <summary>
         /// Retourne les filtres possibles pour la selection des véhicules.
@@ -267,6 +267,7 @@ namespace BL
                                 VehicleTypeId = (int)row["VehicleType_Id"],
                                 Label = row["Label"].ToString(),
                                 IsLarge = (bool)row["IsLarge"],
+                                Path = row["Path"].ToString(),
 
                             };
                             _pics.Add(temp);

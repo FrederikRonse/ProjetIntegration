@@ -62,12 +62,12 @@ namespace BL
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns></returns>
-        public static List<Promo> GetPromosByVehicle(int vehicleId)
+        public static List<Promo> GetPromosByVehicle(int vehicleId, string officeName)
         {
             List<Promo> _promos = new List<Promo>();
             try
             {
-                DataTable _table = DalPromo.GetPromoByVehicle(vehicleId);
+                DataTable _table = DalPromo.GetPromoByVehicle(vehicleId, officeName);
                 if (_table != null)
                 {
                     if (_table.Rows.Count != 0)
@@ -83,7 +83,7 @@ namespace BL
                             temp.EndDate = (DateTime)row["EndDate"];
 
                             if (row["PercentReduc"] != DBNull.Value) temp.PercentReduc = (byte)row["PercentReduc"];
-                            if (row["FixedReduc"] != DBNull.Value) temp.FixedReduc = (int)row["FixedReduc"];
+                            if (row["FixedReduc"] != DBNull.Value) temp.FixedReduc = (decimal)row["FixedReduc"];
 
                             _promos.Add(temp);
                         }

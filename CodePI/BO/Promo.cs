@@ -15,6 +15,6 @@ namespace BO
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public byte? PercentReduc { get; set; }
-        public int? FixedReduc { get; set; }
+        public decimal? FixedReduc { get; set; }
     }
 }

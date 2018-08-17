@@ -66,8 +66,11 @@ namespace WebApplication1.Controllers
                     _vMvehicle.Id = item.VehicleId;
                     _vMvehicle.MakeName = item.VehicleType.MakeName;
                     _vMvehicle.ModelName = item.VehicleType.ModelName;
+                    _vMvehicle.PicPath = item.Pictures[0].Path;
+                    _vMvehicle.PicLabel = item.Pictures[0].Label;
                     _vMvehicle.DailyPrice = (int)item.DailyPrice;
-                    _vMvehicle.Ndays = (byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days;
+                    _vMvehicle.Ndays = ((byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days) > 0 ?
+                                        (byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days : (byte)1 ; // un jour minimum.
                     _vMvehicle.PromoTotal = GetTotalPromo();
                     _vMvehicle.PriceToPay = _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal >= 0 ?
                                             _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal : 0; // Pas de prix négatif (0= gratuit).
@@ -75,11 +78,14 @@ namespace WebApplication1.Controllers
                     _vMvehicle.DoorsCount = item.VehicleType.DoorsCount;
                     _vMvehicle.FuelName = item.VehicleType.FuelName;
 
+
+                    _vMvehicles.Add(_vMvehicle);
+
                     //calcul du total des promos pour chaque véhicule.
                     int GetTotalPromo()
                     {
                         int _promoTotal = 0;
-                        List<BO.Promo> _promos = BL.BLPromo.GetPromosByVehicle(item.VehicleId);
+                        List<BO.Promo> _promos = BL.BLPromo.GetPromosByVehicle(item.VehicleId, item.OfficeName);
                         if (_promos.Count != 0)
                         {
                             byte _totalPercentReduc = 0;
@@ -98,7 +104,7 @@ namespace WebApplication1.Controllers
 
                 }
             }
-            return View("VehicleSelection");
+            return View("VehicleSelection", _vMvehicles);
         }
 
         // GET: Vehicle
