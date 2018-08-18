@@ -282,6 +282,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\SelectionFilters.cshtml" />
     <Content Include="Views\Vehicles\VehicleSelection.cshtml" />
+    <Content Include="Views\Vehicles\Fleet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

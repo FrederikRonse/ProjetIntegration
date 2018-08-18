@@ -13,6 +13,7 @@
             <a class="btn navbar-btn ml-2 text-white btn-danger" href="@Url.Action("Index", "Home")"> New Search</a>
             <a class="btn navbar-btn ml-2 text-white btn-danger" href="@Url.Action("Fleet", "Vehicles")"> See All Vehicles (Location)</a>
         </div>
+        <span>@Model.Count() results</span>
     </div>
 </nav>
 <table class="table">

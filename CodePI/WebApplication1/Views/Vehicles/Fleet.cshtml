@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApplication1.Models.View_Models.VMvehicle>
+
+@{
+    ViewBag.Title = "Fleet";
+}
+
+<nav class="navbar navbar-expand-md bg-primary navbar-light border border-light">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center justify-content-start" id="navbar2SupportedContent">
+            @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })  @*new { @class = "form-control", onchange = "this.form.submit();" })
+                    @Html.DropDownList(x => ViewBag.LstOffices, ViewBag.LstOffices, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })
+                </div>
+                <span>@Model.Count() results</span>
+            </div>
+        </nav>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MakeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModelName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DailyPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ndays)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PromoTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PriceToPay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoorsCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FuelName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CCName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MakeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModelName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DailyPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ndays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PromoTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceToPay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoorsCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FuelName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CCName)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Rent", "Rent", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>

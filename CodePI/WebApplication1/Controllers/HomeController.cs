@@ -38,8 +38,7 @@ namespace WebApplication1.Controllers
 
             if (Session["filters"] == null)
             {
-                // BL.BLVehicle _bLVehicle = new BL.BLVehicle();
-                _filterOptions = BL.BLVehicle.GetFilterOptions(); // = new SelectList(_officeList, "Name", "Name", _officeList[0].Name);
+                _filterOptions = BL.BLVehicle.GetFilterOptions();
                 if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
                 _filters.LstOffices = new SelectList(_filterOptions.lstOffices);
                 _filters.LstMakes = new SelectList(_filterOptions.lstMakes);
@@ -63,10 +62,9 @@ namespace WebApplication1.Controllers
 
             if (filterOptions.lstOffices != null && filterOptions.lstOffices[0] != "")
             {
-                Session["slctdOffice"] = filterOptions.lstOffices[0];
+               // Session["slctdOffice"] = filterOptions.lstOffices[0];     Pas utilisé pour éviter possible confusion/oubli.
                 SelectList UpdatedLstOffices = new SelectList(_session.LstOffices.Items, filterOptions.lstOffices[0]);
                 ((VMvehicleFilters)Session["filters"]).LstOffices = UpdatedLstOffices;
-
                 _slctdfilters.OfficeName = filterOptions.lstOffices[0];
             }
             else if (_session.LstOffices.SelectedValue != null) _slctdfilters.OfficeName = _session.LstOffices.SelectedValue.ToString();
@@ -75,7 +73,6 @@ namespace WebApplication1.Controllers
             {
                 SelectList UpdatedlstMakes = new SelectList(_session.LstMakes.Items, filterOptions.lstMakes[0]);
                 ((VMvehicleFilters)Session["filters"]).LstMakes = UpdatedlstMakes;
-
                 _slctdfilters.MakeName = filterOptions.lstMakes[0];
             }
             else if (_session.LstMakes.SelectedValue != null) _slctdfilters.MakeName = _session.LstMakes.SelectedValue.ToString();
@@ -84,7 +81,6 @@ namespace WebApplication1.Controllers
             {
                 SelectList UpdatedlstFuels = new SelectList(_session.LstFuels.Items, filterOptions.lstFuels[0]);
                 ((VMvehicleFilters)Session["filters"]).LstFuels = UpdatedlstFuels;
-
                 _slctdfilters.FuelName = filterOptions.lstFuels[0];
             }
             else if (_session.LstFuels.SelectedValue != null) _slctdfilters.FuelName = _session.LstFuels.SelectedValue.ToString();
@@ -93,7 +89,6 @@ namespace WebApplication1.Controllers
             {
                 SelectList UpdatedlstDoors = new SelectList(_session.LstDoors.Items, filterOptions.lstDoors[0]);
                 ((VMvehicleFilters)Session["filters"]).LstDoors = UpdatedlstDoors;
-
                 _slctdfilters.DoorsCount = filterOptions.lstDoors[0];
             }
             else if (_session.LstDoors.SelectedValue != null) _slctdfilters.DoorsCount = (byte)_session.LstDoors.SelectedValue;
@@ -111,7 +106,6 @@ namespace WebApplication1.Controllers
         //  [HttpGet]
         public ActionResult SetVehicles(BO.FilterOptions filterOptions)
         {
-           // BO.SlctdFilters _vehiclefilter = 
             TempData["vehiclefilter"] = UpdateFilterOptions(filterOptions); ; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
             return RedirectToAction("GetVehiclesByFilter", "Vehicles");
         }
