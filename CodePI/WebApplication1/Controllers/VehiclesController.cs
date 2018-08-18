@@ -63,21 +63,20 @@ namespace WebApplication1.Controllers
                 foreach (BO.VehicleDetails item in _result)
                 {
                     VMvehicle _vMvehicle = new VMvehicle();
-                 //   _vMvehicle.Id = item.VehicleId;
+                    //   _vMvehicle.Id = item.VehicleId;
                     _vMvehicle.MakeName = item.VehicleType.MakeName;
                     _vMvehicle.ModelName = item.VehicleType.ModelName;
                     _vMvehicle.PicPath = item.Pictures[0].Path;
                     _vMvehicle.PicLabel = item.Pictures[0].Label;
                     _vMvehicle.DailyPrice = (int)item.DailyPrice;
                     _vMvehicle.Ndays = ((byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days) > 0 ?
-                                        (byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days : (byte)1 ; // un jour minimum.
+                                        (byte)(_slctdFilter.EndDate - _slctdFilter.StartDate).Days : (byte)1; // un jour minimum.
                     _vMvehicle.PromoTotal = GetTotalPromo();
                     _vMvehicle.PriceToPay = _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal >= 0 ?
                                             _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal : 0; // Pas de prix négatif (0= gratuit).
                     _vMvehicle.CCName = item.VehicleType.CCName;
                     _vMvehicle.DoorsCount = item.VehicleType.DoorsCount;
                     _vMvehicle.FuelName = item.VehicleType.FuelName;
-
 
                     _vMvehicles.Add(_vMvehicle);
 
@@ -101,29 +100,10 @@ namespace WebApplication1.Controllers
                         }
                         return _promoTotal;
                     }
-
                 }
             }
             return View("VehicleSelection", _vMvehicles);
         }
-
-        // GET: Vehicle
-        /// <summary>
-        /// Retourne les véhicules correspondants aux paramètres fournis.
-        /// </summary>
-        /// <param name="slctdFilter"></param>
-        /// <param name="withPics"></param>
-        /// <returns></returns>
-        //[HttpGet]
-        //public ActionResult GetVehiclesByFilter(BO.SlctdFilters slctdFilter = null, bool withPics = true)
-        //{
-        //    if (slctdFilter == null)
-        //    {
-        //        BO.SlctdFilters _slctdFilter = TempData["vehiclefilter"] as BO.SlctdFilters;
-        //        return View(BL.BLVehicle.GetVehicleByFilter(_slctdFilter));
-        //    }
-        //    else return View(BL.BLVehicle.GetVehicleByFilter(slctdFilter, withPics));
-        //}
     }
 
 }

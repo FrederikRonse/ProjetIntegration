@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         BO.FilterOptions _filterOptions;
-        VMvehicleFilters _filters;
+        //   VMvehicleFilters _filters;
 
         /// <summary>
         /// Retourne la vue principale,
@@ -21,11 +21,11 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            if (_filters == null)
+            if (Session["filters"] == null)
             {
                 SetFilterOptions();
             }
-            return View(_filters);
+            return View(Session["filters"] as VMvehicleFilters);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         public void SetFilterOptions(BO.FilterOptions selectedOptions = null)
         {
-            _filters = new VMvehicleFilters();
+            VMvehicleFilters _filters = new VMvehicleFilters();
 
             if (Session["filters"] == null)
             {
@@ -55,65 +55,51 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Mets à jour les filtres pour dropdowns selection dans Session["filters"].
         /// </summary>
-        /// <param name="selectedOptions"></param>
-        public void UpdateFilterOptions(BO.FilterOptions selectedOptions)
+        /// <param name="filterOptions"></param>
+        public BO.SlctdFilters UpdateFilterOptions(BO.FilterOptions filterOptions)
         {
             VMvehicleFilters _session = (VMvehicleFilters)Session["filters"];
-            if (selectedOptions.lstOffices != null && selectedOptions.lstOffices[0] != "")
-            {
-                Session["slctdOffice"] = selectedOptions.lstOffices[0];
-                SelectList UpdatedLstOffices = new SelectList(_session.LstOffices.Items, selectedOptions.lstOffices[0]);
-                ((VMvehicleFilters)Session["filters"]).LstOffices = UpdatedLstOffices;
-                _filters.LstOffices = UpdatedLstOffices;
-            }
-            if (selectedOptions.lstMakes != null && selectedOptions.lstMakes[0] != "")
-            {
-                Session["slctdMake"] = selectedOptions.lstMakes[0];
-                SelectList UpdatedlstMakes = new SelectList(_session.LstMakes.Items, selectedOptions.lstMakes[0]);
-                ((VMvehicleFilters)Session["filters"]).LstMakes = UpdatedlstMakes;
-                _filters.LstMakes = UpdatedlstMakes;
-            }
-            if (selectedOptions.lstFuels != null && selectedOptions.lstFuels[0] != "")
-            {
-                Session["slctdFuel"] = selectedOptions.lstFuels[0];
-                SelectList UpdatedlstFuels = new SelectList(_session.LstFuels.Items, selectedOptions.lstFuels[0]);
-                ((VMvehicleFilters)Session["filters"]).LstFuels = UpdatedlstFuels;
-                _filters.LstFuels = UpdatedlstFuels;
-            }
-            if (selectedOptions.lstCC != null && selectedOptions.lstCC[0] != "")
-            {
-                Session["slctdDoors"] = selectedOptions.lstDoors[0];
-                SelectList UpdatedlstDoors = new SelectList(_session.LstDoors.Items, selectedOptions.lstDoors[0]);
-                ((VMvehicleFilters)Session["filters"]).LstDoors = UpdatedlstDoors;
-                _filters.LstDoors = UpdatedlstDoors;
-            }
-        }
+            BO.SlctdFilters _slctdfilters = new BO.SlctdFilters();
 
-        /// <summary>
-        /// Récupères les options choisies.
-        /// </summary>
-        /// <param name="filterOptions"></param>
-        /// <returns></returns>
-         public static BO.SlctdFilters GetSlctdFilters(BO.FilterOptions filterOptions)
-        {
-            BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();
             if (filterOptions.lstOffices != null && filterOptions.lstOffices[0] != "")
             {
-                _vehiclefilter.OfficeName = filterOptions.lstOffices[0];
+                Session["slctdOffice"] = filterOptions.lstOffices[0];
+                SelectList UpdatedLstOffices = new SelectList(_session.LstOffices.Items, filterOptions.lstOffices[0]);
+                ((VMvehicleFilters)Session["filters"]).LstOffices = UpdatedLstOffices;
+
+                _slctdfilters.OfficeName = filterOptions.lstOffices[0];
             }
+            else if (_session.LstOffices.SelectedValue != null) _slctdfilters.OfficeName = _session.LstOffices.SelectedValue.ToString();
+
             if (filterOptions.lstMakes != null && filterOptions.lstMakes[0] != "")
             {
-                _vehiclefilter.MakeName = filterOptions.lstMakes[0];
+                SelectList UpdatedlstMakes = new SelectList(_session.LstMakes.Items, filterOptions.lstMakes[0]);
+                ((VMvehicleFilters)Session["filters"]).LstMakes = UpdatedlstMakes;
+
+                _slctdfilters.MakeName = filterOptions.lstMakes[0];
             }
+            else if (_session.LstMakes.SelectedValue != null) _slctdfilters.MakeName = _session.LstMakes.SelectedValue.ToString();
+
             if (filterOptions.lstFuels != null && filterOptions.lstFuels[0] != "")
             {
-                _vehiclefilter.FuelName = filterOptions.lstFuels[0];
+                SelectList UpdatedlstFuels = new SelectList(_session.LstFuels.Items, filterOptions.lstFuels[0]);
+                ((VMvehicleFilters)Session["filters"]).LstFuels = UpdatedlstFuels;
+
+                _slctdfilters.FuelName = filterOptions.lstFuels[0];
             }
+            else if (_session.LstFuels.SelectedValue != null) _slctdfilters.FuelName = _session.LstFuels.SelectedValue.ToString();
+            
             if (filterOptions.lstDoors != null && filterOptions.lstDoors[0] != 0)
             {
-                _vehiclefilter.DoorsCount = filterOptions.lstDoors[0];
+                SelectList UpdatedlstDoors = new SelectList(_session.LstDoors.Items, filterOptions.lstDoors[0]);
+                ((VMvehicleFilters)Session["filters"]).LstDoors = UpdatedlstDoors;
+
+                _slctdfilters.DoorsCount = filterOptions.lstDoors[0];
             }
-            return _vehiclefilter;
+            else if (_session.LstDoors.SelectedValue != null) _slctdfilters.DoorsCount = (byte)_session.LstDoors.SelectedValue;
+
+            return _slctdfilters;
+
         }
 
         /// <summary>
@@ -122,14 +108,12 @@ namespace WebApplication1.Controllers
         /// récupération et affichage des véhicules.
         /// </summary>
         /// <param name="filterOptions"></param>
-      //  [HttpGet]
+        //  [HttpGet]
         public ActionResult SetVehicles(BO.FilterOptions filterOptions)
         {
-            SetFilterOptions(filterOptions);
-
-            BO.SlctdFilters _vehiclefilter = GetSlctdFilters(filterOptions);
-            TempData["vehiclefilter"] = _vehiclefilter; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
-            return RedirectToAction("GetVehiclesByFilter", "Vehicles"); //  , new { slctdFilter = }
+           // BO.SlctdFilters _vehiclefilter = 
+            TempData["vehiclefilter"] = UpdateFilterOptions(filterOptions); ; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
+            return RedirectToAction("GetVehiclesByFilter", "Vehicles");
         }
 
     }
