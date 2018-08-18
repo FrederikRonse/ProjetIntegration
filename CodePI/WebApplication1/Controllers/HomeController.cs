@@ -69,21 +69,21 @@ namespace WebApplication1.Controllers
             if (selectedOptions.lstMakes != null && selectedOptions.lstMakes[0] != "")
             {
                 Session["slctdMake"] = selectedOptions.lstMakes[0];
-                SelectList UpdatedlstMakes = new SelectList(_session.LstMakes, selectedOptions.lstMakes[0]);
+                SelectList UpdatedlstMakes = new SelectList(_session.LstMakes.Items, selectedOptions.lstMakes[0]);
                 ((VMvehicleFilters)Session["filters"]).LstMakes = UpdatedlstMakes;
                 _filters.LstMakes = UpdatedlstMakes;
             }
             if (selectedOptions.lstFuels != null && selectedOptions.lstFuels[0] != "")
             {
                 Session["slctdFuel"] = selectedOptions.lstFuels[0];
-                SelectList UpdatedlstFuels = new SelectList(_session.LstFuels, selectedOptions.lstFuels[0]);
+                SelectList UpdatedlstFuels = new SelectList(_session.LstFuels.Items, selectedOptions.lstFuels[0]);
                 ((VMvehicleFilters)Session["filters"]).LstFuels = UpdatedlstFuels;
                 _filters.LstFuels = UpdatedlstFuels;
             }
             if (selectedOptions.lstCC != null && selectedOptions.lstCC[0] != "")
             {
                 Session["slctdDoors"] = selectedOptions.lstDoors[0];
-                SelectList UpdatedlstDoors = new SelectList(_session.LstDoors, selectedOptions.lstDoors[0]);
+                SelectList UpdatedlstDoors = new SelectList(_session.LstDoors.Items, selectedOptions.lstDoors[0]);
                 ((VMvehicleFilters)Session["filters"]).LstDoors = UpdatedlstDoors;
                 _filters.LstDoors = UpdatedlstDoors;
             }
