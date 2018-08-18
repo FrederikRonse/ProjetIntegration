@@ -208,7 +208,7 @@ namespace BL
                         {
                             VehicleDetails temp = new VehicleDetails();
                             VehicleType vehicleType = new VehicleType();
-                            temp.VehicleId = (int)row["Id"];
+                          //  temp.VehicleId = (int)row["Id"];
                             temp.OfficeName = row["Office_name"].ToString();
                             temp.DailyPrice = (decimal)row["DailyPrice"];
                             // Ajout des caractèristiques "type"

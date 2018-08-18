@@ -62,12 +62,12 @@ namespace BL
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns></returns>
-        public static List<Promo> GetPromosByVehicle(int vehicleId, string officeName)
+        public static List<Promo> GetPromosForVehicleType(int vehicleTypeId, string officeName)
         {
             List<Promo> _promos = new List<Promo>();
             try
             {
-                DataTable _table = DalPromo.GetPromoByVehicle(vehicleId, officeName);
+                DataTable _table = DalPromo.GetPromoByVehicle(vehicleTypeId, officeName);
                 if (_table != null)
                 {
                     if (_table.Rows.Count != 0)

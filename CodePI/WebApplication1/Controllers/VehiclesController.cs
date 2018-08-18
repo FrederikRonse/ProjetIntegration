@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
                 foreach (BO.VehicleDetails item in _result)
                 {
                     VMvehicle _vMvehicle = new VMvehicle();
-                    _vMvehicle.Id = item.VehicleId;
+                 //   _vMvehicle.Id = item.VehicleId;
                     _vMvehicle.MakeName = item.VehicleType.MakeName;
                     _vMvehicle.ModelName = item.VehicleType.ModelName;
                     _vMvehicle.PicPath = item.Pictures[0].Path;
@@ -85,7 +85,7 @@ namespace WebApplication1.Controllers
                     int GetTotalPromo()
                     {
                         int _promoTotal = 0;
-                        List<BO.Promo> _promos = BL.BLPromo.GetPromosByVehicle(item.VehicleId, item.OfficeName);
+                        List<BO.Promo> _promos = BL.BLPromo.GetPromosForVehicleType(item.VehicleType.Id, item.OfficeName);
                         if (_promos.Count != 0)
                         {
                             byte _totalPercentReduc = 0;
