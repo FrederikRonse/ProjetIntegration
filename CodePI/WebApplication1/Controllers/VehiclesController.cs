@@ -42,7 +42,7 @@ namespace WebApplication1.Controllers
             {
                 foreach (BO.VehicleDetails item in _result)
                 {
-                    _vMvehicles.Add(ToVMvehicle(item));
+                    _vMvehicles.Add(ToVMvehicle(item, _slctdFilter.StartDate, _slctdFilter.StartDate));
                 }
             }
             return _vMvehicles;
@@ -74,8 +74,8 @@ namespace WebApplication1.Controllers
             _vMvehicle.DailyPrice = (int)vehicleDetails.DailyPrice;
             _vMvehicle.StartDate = startDate;
             _vMvehicle.EndDate = endDate;
-            _vMvehicle.Ndays = ((byte)(endDate - startDate).Days) > 0 ?
-                                    (byte)(endDate - startDate).Days : (byte)1; // un jour minimum.
+            //_vMvehicle.Ndays = ((byte)(endDate - startDate).Days) > 0 ?
+            //                        (byte)(endDate - startDate).Days : (byte)1; // un jour minimum.
             _vMvehicle.PromoTotal = GetTotalPromo();
             _vMvehicle.PriceToPay = _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal >= 0 ?
                                     _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal : 0; // Pas de prix négatif (0= gratuit).
