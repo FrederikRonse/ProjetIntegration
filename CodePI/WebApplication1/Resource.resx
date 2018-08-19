@@ -183,4 +183,13 @@
   <data name="SelectPlace" xml:space="preserve">
     <value>Select the pick-up place</value>
   </data>
+  <data name="RentThisLink" xml:space="preserve">
+    <value>Rent This Car</value>
+  </data>
+  <data name="vDetailsLink" xml:space="preserve">
+    <value>More Infos</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
 </root>

@@ -34,10 +34,9 @@ namespace WebApplication1.Controllers
         public List<VMvehicle> GetVehiclesByFilter()
         {
             List<VMvehicle> _vMvehicles = new List<VMvehicle>();
-
             BO.SlctdFilters _slctdFilter = TempData["vehiclefilter"] as BO.SlctdFilters;
-            List<BO.VehicleDetails> _result = BL.BLVehicle.GetVehicleByFilter(_slctdFilter);
 
+            List<BO.VehicleDetails> _result = BL.BLVehicle.GetVehicleByFilter(_slctdFilter);
             if (_result.Count != 0)
             {
                 foreach (BO.VehicleDetails item in _result)
@@ -48,25 +47,41 @@ namespace WebApplication1.Controllers
             return _vMvehicles;
         }
 
-        public ActionResult VehicleDetails(int? id)
+        /// <summary>
+        /// Va chercher un véhicule en BDD.
+        /// </summary>
+        /// <param name="typeId"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GetVehicleDetails(int? typeId, DateTime startDate, DateTime endDate)
         {
-            if (id == null)
+            VMvehicle _vMvehicle = new VMvehicle();
+            if (typeId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BO.VehicleDetails _vehicleToConvert = BL.BLVehicle.GetVehicle((int)id);
+            BO.VehicleDetails _vehicleToConvert = BL.BLVehicle.GetVehicle((int)typeId);
             if (_vehicleToConvert == null)
             {
                 return HttpNotFound();
             }
-            //    VMvehicle
-            return View(_vehicleToConvert);
+            _vMvehicle = ToVMvehicle(_vehicleToConvert, startDate, endDate);
+            return View("VehicleDetails",_vMvehicle);
         }
 
+        /// <summary>
+        /// Convertit un VehicleDetails vers un VMvehicle.
+        /// </summary>
+        /// <param name="vehicleDetails"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         public VMvehicle ToVMvehicle(BO.VehicleDetails vehicleDetails, DateTime startDate, DateTime endDate)
         {
             VMvehicle _vMvehicle = new VMvehicle();
-            //   _vMvehicle.Id = item.VehicleId;
+            _vMvehicle.TypeId = vehicleDetails.VehicleType.Id;
             _vMvehicle.MakeName = vehicleDetails.VehicleType.MakeName;
             _vMvehicle.ModelName = vehicleDetails.VehicleType.ModelName;
             _vMvehicle.PicPath = vehicleDetails.Pictures[0].Path;
@@ -74,8 +89,7 @@ namespace WebApplication1.Controllers
             _vMvehicle.DailyPrice = (int)vehicleDetails.DailyPrice;
             _vMvehicle.StartDate = startDate;
             _vMvehicle.EndDate = endDate;
-            //_vMvehicle.Ndays = ((byte)(endDate - startDate).Days) > 0 ?
-            //                        (byte)(endDate - startDate).Days : (byte)1; // un jour minimum.
+            // _vMvehicle.NDays assigné par .EndDate au niveau du modèle.
             _vMvehicle.PromoTotal = GetTotalPromo();
             _vMvehicle.PriceToPay = _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal >= 0 ?
                                     _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal : 0; // Pas de prix négatif (0= gratuit).
@@ -154,6 +168,22 @@ namespace WebApplication1.Controllers
             _vehiclefilter.OfficeName = _slctdOffice;
             TempData["vehiclefilter"] = _vehiclefilter;
             return View("Fleet", GetVehiclesByFilter());
+        }
+
+
+
+        /// PAS UTILISE : Problème pour sérialiser etpasser une instance VMvehicle apd la vue.
+        /// <summary>
+        /// Affiche les détails d'un véhicule
+        /// (de la liste déjà constituée).
+        /// </summary>
+        /// <param name="vMvehicle"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult VehicleDetails(VMvehicle vehicleToDisplay)
+        {
+
+            return View((VMvehicle)vehicleToDisplay);
         }
     }
 

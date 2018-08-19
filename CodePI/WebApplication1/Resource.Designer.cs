@@ -70,6 +70,15 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string CCName {
@@ -196,6 +205,15 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rent This Car.
+        /// </summary>
+        public static string RentThisLink {
+            get {
+                return ResourceManager.GetString("RentThisLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Results.
         /// </summary>
         public static string Results {
@@ -255,6 +273,15 @@ namespace WebApplication1 {
         public static string SelectPlace {
             get {
                 return ResourceManager.GetString("SelectPlace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More Infos.
+        /// </summary>
+        public static string vDetailsLink {
+            get {
+                return ResourceManager.GetString("vDetailsLink", resourceCulture);
             }
         }
     }

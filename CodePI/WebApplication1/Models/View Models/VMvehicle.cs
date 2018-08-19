@@ -10,16 +10,17 @@ namespace WebApplication1.Models.View_Models
 {
     /// <summary>
     /// ! DailyPrice en int
+    /// StartDate et EndDate doivent être renseignées pour 
+    /// avoir le N de jours (set mis en privé).
     /// </summary>
     public class VMvehicle
     {
-        private byte _ndays;
         private DateTime _endDate;
 
         [Key]
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
-        public int Id { get; set; }
+        public int TypeId { get; set; }
         [Display(Name = "Make")]
         public string MakeName { get; set; }
         [Display(Name = "Model")]
@@ -36,19 +37,14 @@ namespace WebApplication1.Models.View_Models
             {
                 this._endDate = ((value - StartDate).Days) > 0 ?
                 _endDate = value : StartDate.AddDays(1);
+
+                this.Ndays = ((byte)(EndDate - StartDate).Days) > 0 ?
+                (byte)(EndDate - StartDate).Days : (byte)1;
             } // un jour minimum. 
         }
         [Display(Name = "Duration")]
         [Range(1, 31)]
-        public byte Ndays
-        {
-            get { return this._ndays; }
-            private set
-            {
-                this._ndays = ((byte)(EndDate - StartDate).Days) > 0 ?
-                (byte)(EndDate - StartDate).Days : (byte)1;
-            } // un jour minimum. 
-        }
+        public byte Ndays { get; set; }
         [Display(Name = "Reduction")]
         public int PromoTotal { get; set; }
         [Display(Name = "Price")]

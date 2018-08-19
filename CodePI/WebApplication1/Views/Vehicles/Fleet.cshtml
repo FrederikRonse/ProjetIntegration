@@ -83,7 +83,7 @@
             </td>
             <td>
 
-                @Html.ActionLink("Rent", "Rent", new { id = item.Id })
+                @Html.ActionLink(@Resource.RentThisLink, "Rent", new { id = item.TypeId })
             </td>
         </tr>
     }

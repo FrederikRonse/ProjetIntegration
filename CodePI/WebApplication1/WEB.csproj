@@ -291,6 +291,7 @@
     <Content Include="Views\Home\SelectionFilters.cshtml" />
     <Content Include="Views\Vehicles\VehicleSelection.cshtml" />
     <Content Include="Views\Vehicles\Fleet.cshtml" />
+    <Content Include="Views\Vehicles\VehicleDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

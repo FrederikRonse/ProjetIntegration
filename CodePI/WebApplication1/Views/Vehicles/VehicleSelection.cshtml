@@ -50,39 +50,46 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MakeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DailyPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ndays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PromoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceToPay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoorsCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuelName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CCName)
-            </td>
-            <td>
-              
-                @Html.ActionLink("Rent", "Rent", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MakeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DailyPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ndays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PromoTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceToPay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoorsCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCName)
+        </td>
+        <td>
+
+            @Html.ActionLink(Resource.RentThisLink, "Rent", new { typeId = item.TypeId })
+            @Html.ActionLink(@Resource.vDetailsLink, "GetVehicleDetails", new { typeId = item.TypeId, startDate = item.StartDate, endDate = item.EndDate })
+        </td>
+    </tr>
     }
 
 </table>
