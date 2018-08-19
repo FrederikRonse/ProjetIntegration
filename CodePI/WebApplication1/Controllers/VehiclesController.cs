@@ -10,7 +10,7 @@ using static EL.CstmEx;
 
 namespace WebApplication1.Controllers
 {
-    public class VehiclesController : Controller
+    public class VehiclesController : BaseController
     {
         /// <summary>
         /// Affiche la flotte de l'agence en session
@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
         /// <param name="officeName"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Fleet(string officeName = "")
+        public ActionResult Fleet(string officeName)
         {
             VMvehicleFilters _filters = new VMvehicleFilters();
             BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();

@@ -3,16 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Helpers;
 using WebApplication1.Models.View_Models;
 
 
 namespace WebApplication1.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         BO.FilterOptions _filterOptions;
-        //   VMvehicleFilters _filters;
-        // Utiliser _filters (- AirCar Belgium) au lieu de la session pour option tous véhicules.
+       
+
+        public ActionResult SetCulture(string culture)
+        {             // Validate input
+            culture = CultureHelper.GetImplementedCulture(culture);
+            // Save culture in a cookie   
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = culture;
+            // update cookie value      
+            else
+            {
+                cookie = new HttpCookie("_culture");
+                cookie.Value = culture;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie); 
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
 
         /// <summary>
         /// Retourne la vue principale,
