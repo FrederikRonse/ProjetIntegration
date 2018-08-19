@@ -10,79 +10,82 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse text-center justify-content-start" id="navbar2SupportedContent">
-            @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })  
-                   @* @Html.DropDownList(x =>ViewBag.selectList, ViewBag.selectList, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })*@
-                </div>
-                <span>@Model.Count() results</span>
-            </div>
-        </nav>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.MakeName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModelName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DailyPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ndays)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PromoTotal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PriceToPay)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DoorsCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FuelName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CCName)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
+            @using (Html.BeginForm("SetVehicles", "Home", FormMethod.Get))
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MakeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModelName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DailyPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ndays)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PromoTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PriceToPay)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DoorsCount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FuelName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CCName)
-                    </td>
-                    <td>
-
-                        @Html.ActionLink("Rent", "Rent", new { id = item.Id })
-                    </td>
-                </tr>
+                @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })
+                @* @Html.DropDownList(x =>ViewBag.selectList, ViewBag.selectList, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })*@
             }
+        </div>
+        <span>@Model.Count() results</span>
+    </div>
+</nav>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MakeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DailyPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ndays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PromoTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceToPay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoorsCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCName)
+        </th>
+        <th></th>
+    </tr>
 
-        </table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ndays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PromoTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceToPay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoorsCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FuelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CCName)
+            </td>
+            <td>
+
+                @Html.ActionLink("Rent", "Rent", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
