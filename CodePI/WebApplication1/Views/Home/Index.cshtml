@@ -11,14 +11,14 @@
                 @using (Html.BeginForm("SetVehicles", "Home", FormMethod.Get))
                 {
                     <div class="form-group">
-                        <label>Pick-up Place</label>
-                        @Html.DropDownListFor(x => x.LstOffices, Model.LstOffices, Model.LstOffices.SelectedValue == null ? "Select the pick-up place" : Model.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })
-                        @Html.DropDownListFor(x => x.LstMakes, Model.LstMakes, Model.LstMakes.SelectedValue == null ? "Select the make" : Model.LstMakes.SelectedValue.ToString(), new { @class = "form-control" })
-                        @Html.DropDownListFor(x => x.LstFuels, Model.LstFuels, Model.LstFuels.SelectedValue == null ? "Select the fuel type" : Model.LstFuels.SelectedValue.ToString(), new { @class = "form-control" })
-                        @Html.DropDownListFor(x => x.LstDoors, Model.LstDoors, Model.LstDoors.SelectedValue == null ? "Select the number of doors" : Model.LstDoors.SelectedValue.ToString(), new { @class = "form-control" })
+                        <label>@Resource.lblPickupPlace</label>
+                        @Html.DropDownListFor(x => x.LstOffices, Model.LstOffices, Model.LstOffices.SelectedValue == null ? Resource.SelectPlace : Model.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.LstMakes, Model.LstMakes, Model.LstMakes.SelectedValue == null ? Resource.SelectMake : Model.LstMakes.SelectedValue.ToString(), new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.LstFuels, Model.LstFuels, Model.LstFuels.SelectedValue == null ? Resource.SelectFuel : Model.LstFuels.SelectedValue.ToString(), new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.LstDoors, Model.LstDoors, Model.LstDoors.SelectedValue == null ? Resource.SelectDoors : Model.LstDoors.SelectedValue.ToString(), new { @class = "form-control" })
                         @* @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control" })  @*new { @class = "form-control", onchange = "this.form.submit();" })*@
                     </div>
-                    <button type="submit" class="btn btn-primary my-3">Search</button>
+                    <button type="submit" class="btn btn-primary my-3">@Resource.Search</button>
                 }
             </div>
 

@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse text-center justify-content-start" id="navbar2SupportedContent">
             @using (Html.BeginForm("Fleet", "Vehicles", FormMethod.Get))
             {
-                @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })
+                @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, Resource.SelectPlace, new { @class = "form-control", onchange = "this.form.submit();" })
                 @* @Html.DropDownList(x =>ViewBag.selectList, ViewBag.selectList, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })*@
             }
         </div>

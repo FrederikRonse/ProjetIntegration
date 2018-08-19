@@ -10,10 +10,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse text-center justify-content-start" id="navbar2SupportedContent">
-            <a class="btn navbar-btn ml-2 text-white btn-danger" href="@Url.Action("Index", "Home")"> New Search</a>
-            <a class="btn navbar-btn ml-2 text-white btn-danger" href="@Url.Action("Fleet", "Vehicles")"> See All Vehicles (Location)</a>
+            <a class="btn navbar-btn ml-2 text-white btn-danger" href="@Url.Action("Index", "Home")"> @Resource.NewSearch</a>
+            <a class="btn navbar-btn ml-2 text-white btn-danger" href="@Url.Action("Fleet", "Vehicles")"> @Resource.SeeAllVehicles</a>
         </div>
-        <span>@Model.Count() results</span>
+        <span>@Model.Count() @Resource.Results</span>
     </div>
 </nav>
 <table class="table">
