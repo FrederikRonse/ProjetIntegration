@@ -13,6 +13,9 @@ namespace WebApplication1.Models.View_Models
     /// </summary>
     public class VMvehicle
     {
+        private byte _ndays;
+        private DateTime _endDate;
+
         [Key]
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
@@ -23,8 +26,29 @@ namespace WebApplication1.Models.View_Models
         public string ModelName { get; set; }
         [Display(Name = "Daily Price")]
         public int DailyPrice { get; set; }
+        [Display(Name = "Start Date")]
+        public DateTime StartDate { get; set; }
+        [Display(Name = "End Date")]
+        public DateTime EndDate
+        {
+            get { return this._endDate; }
+            set
+            {
+                this._endDate = ((value - StartDate).Days) > 0 ?
+                _endDate = value : StartDate.AddDays(1);
+            } // un jour minimum. 
+        }
         [Display(Name = "Duration")]
-        public byte Ndays { get; set; }
+        [Range(1, 31)]
+        public byte Ndays
+        {
+            get { return this._ndays; }
+            private set
+            {
+                this._ndays = ((byte)(EndDate - StartDate).Days) > 0 ?
+                (byte)(EndDate - StartDate).Days : (byte)1;
+            } // un jour minimum. 
+        }
         [Display(Name = "Reduction")]
         public int PromoTotal { get; set; }
         [Display(Name = "Price")]
