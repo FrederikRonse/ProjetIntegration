@@ -10,16 +10,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse text-center justify-content-start" id="navbar2SupportedContent">
-            @using (Html.BeginForm("Fleet", "Vehicles", FormMethod.Get))
-            {
-                <div class="form-group">
-                    <label>Pick-up Place</label>
-                   @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })
-            @* @Html.DropDownList(x =>ViewBag.selectList, ViewBag.selectList, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })*@
+            @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })  
+                   @* @Html.DropDownList(x =>ViewBag.selectList, ViewBag.selectList, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })*@
                 </div>
-            }
-          
-        </div>
                 <span>@Model.Count() results</span>
             </div>
         </nav>
