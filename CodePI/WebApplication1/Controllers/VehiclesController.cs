@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
     {
         /// <summary>
         /// Affiche la flotte de l'agence en session
-        /// ou de l'ensemble de la flotte.
+        /// ou de la première agence.
         /// </summary>
         /// <param name="officeName"></param>
         /// <returns></returns>
@@ -27,8 +27,9 @@ namespace WebApplication1.Controllers
             //Récupération des options.
             if (Session["filters"] != null) _filters = (VMvehicleFilters)(Session["filters"]);
             else
-            {// Génère la liste des options de filtre en session (toutes).
+            {// Génère les listes des options de filtre en session.
                 BO.FilterOptions _filterOptions = BL.BLVehicle.GetFilterOptions();
+                if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
                 _filters.LstOffices = new SelectList(_filterOptions.lstOffices);
                 _filters.LstMakes = new SelectList(_filterOptions.lstMakes);
                 _filters.LstFuels = new SelectList(_filterOptions.lstFuels);
@@ -39,24 +40,29 @@ namespace WebApplication1.Controllers
             //ou de la première agence de la liste.
             SelectList _selectList = _filters.LstOffices;
             string _slctdOffice;
-            _slctdOffice = (string.IsNullOrEmpty(officeName) != true) ? officeName : 
-               (string.IsNullOrEmpty(_selectList.SelectedValue.ToString()) == false) ? _selectList.SelectedValue.ToString() :  // Si une agence a déjà été sélectionnée (via Session["slctdOffice").
-                                                                                       _selectList.ElementAt(0).Value.ToString();  // sinon (en cas de session expirée) 0 = toute la flotte (Aircar Bel.)
+            var test = _selectList.First();
+           //  test = _selectList.SingleOrDefault(p => p.Value.ToString() !="");
+             test = _selectList.First(p => p.Text != "Anvers");
+            test = _selectList.SingleOrDefault(p => p.Text == "Liège");
+            test = _selectList.ElementAt(1);
+            _slctdOffice = (string.IsNullOrEmpty(officeName) != true) ? officeName :
+                                  (_selectList.SelectedValue != null) ? _selectList.SelectedValue.ToString() :  // Si une agence a déjà été sélectionnée (via Session["slctdOffice").
+                                                                         _selectList.ElementAt(1).Text;  // sinon (en cas de session expirée) 
             _selectList.Select(x => x.Value == _slctdOffice);
-            ViewBag["selectList"] = _selectList;
+            ViewBag.selectList = _selectList;
             // Sauvegarde de l'éventuelle modif d'agence en session.
             _filters.LstOffices = _selectList;
             Session["filters"] = _filters;
 
 
             // Récup des véhicules à afficher.
-            _vehiclefilter.OfficeName = officeName;
+            _vehiclefilter.OfficeName = _slctdOffice;
             TempData["vehiclefilter"] = _vehiclefilter;
-            return View(GetVehiclesByFilter());
+            return View("Fleet",GetVehiclesByFilter());
         }
 
         /// <summary>
-        /// Affiche les véhicules coréspondants aux critères choisis.
+        /// Affiche les véhicules corespondants aux critères choisis.
         /// </summary>
         /// <returns></returns>
         [HttpGet]

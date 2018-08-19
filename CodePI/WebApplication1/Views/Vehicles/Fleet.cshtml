@@ -10,8 +10,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse text-center justify-content-start" id="navbar2SupportedContent">
-            @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })  @*new { @class = "form-control", onchange = "this.form.submit();" })
-                    @Html.DropDownList(x => ViewBag.LstOffices, ViewBag.LstOffices, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })
+            @Html.DropDownList("officeFilter", (SelectList)ViewBag.selectList, "Select the pick-up place", new { @class = "form-control", onchange = "this.form.submit();" })  
+                   @* @Html.DropDownList(x =>ViewBag.selectList, ViewBag.selectList, ViewBag.SelectedValue == null ? "Select the pick-up place" : ViewBag.LstOffices.SelectedValue.ToString(), new { @class = "form-control" })*@
                 </div>
                 <span>@Model.Count() results</span>
             </div>

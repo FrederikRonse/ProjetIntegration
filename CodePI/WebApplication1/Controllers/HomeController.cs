@@ -12,6 +12,7 @@ namespace WebApplication1.Controllers
     {
         BO.FilterOptions _filterOptions;
         //   VMvehicleFilters _filters;
+        // Utiliser _filters (- AirCar Belgium) au lieu de la session pour option tous véhicules.
 
         /// <summary>
         /// Retourne la vue principale,
@@ -107,7 +108,7 @@ namespace WebApplication1.Controllers
         public ActionResult SetVehicles(BO.FilterOptions filterOptions)
         {
             TempData["vehiclefilter"] = UpdateFilterOptions(filterOptions); ; // ou (pour non objets) utiliser RouteValueDictionary {{vf = _vehiclefilter},{withPics = true}};
-            return RedirectToAction("GetVehiclesByFilter", "Vehicles");
+            return RedirectToAction("GetSelection", "Vehicles");
         }
 
     }
