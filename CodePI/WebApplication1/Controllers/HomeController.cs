@@ -45,7 +45,10 @@ namespace WebApplication1.Controllers
             {
                 SetFilterOptions();
             }
+            List<string> _pics = new List<string>() { @" ~\Content\Images\Beetle.png", @" ~\Content\Images\Mustang.png", @" ~\Content\Images\Passat.png" };
+            Session["pics"] = _pics;
             return View(Session["filters"] as VMvehicleFilters);
+
         }
 
         /// <summary>

@@ -19,10 +19,11 @@
                         @* @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control" })  @*new { @class = "form-control", onchange = "this.form.submit();" })*@
                     </div>
                     <button type="submit" class="btn btn-primary my-3">@Resource.Search</button>
-                    <div> @Html.ValidationMessageFor(m=>m.LstOffices.SelectedValue) </div>
+                    <div> @Html.ValidationMessageFor(m => m.LstOffices.SelectedValue) </div>
                 }
             </div>
-            
+
+
 
 
             <div class="col-md-6">
@@ -44,14 +45,19 @@
                                     </ol>
                                     <div class="carousel-inner" role="listbox">
                                         <div class="carousel-item active">
-                                            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_architecture_1.jpg" data-holder-rendered="true">
+                                            <img class="d-block img-fluid" src="~/Content/Images/Fiesta.png" data-holder-rendered="true">
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_architecture_2.jpg" data-holder-rendered="true">
+                                            <img class="d-block img-fluid" src="~/Content/Images/Passat.png" data-holder-rendered="true">
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_architecture_3.jpg" data-holder-rendered="true">
+                                            <img class="d-block img-fluid" src="~/Content/Images/Golf.png" data-holder-rendered="true">
                                         </div>
+                                        @*@foreach (string picPath in (List<string>)(Session["pics"]))
+                                        {<div class="carousel-item">
+                                                <img class="d-block img-fluid" src=picPath data-holder-rendered="true">
+                                            </div>
+                                        }*@
                                     </div>
                                 </div>
                             </div>

@@ -89,6 +89,11 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             _vMvehicle = ToVMvehicle(_vehicleToConvert, startDate, endDate);
+            //if (Session["pics"]!=null)
+            List<string> _pics = Session["pics"] != null ? (List<string>)Session["pics"] : new List<string>();
+            if (_pics.Count > 5) _pics.RemoveAt(0);
+            _pics.Add(_vMvehicle.PicPath);
+            Session["pics"] = _pics;
             return View("VehicleDetails",_vMvehicle);
         }
 
