@@ -30,14 +30,14 @@ namespace BL
                         {
                             Promo temp = new Promo();
                             temp.PromotionModel_Id = (int)row["PromotionModel_Id"];
-                            temp.VehicleType_Id = (int)row["VehicleType_Id"];
+                           // temp.VehicleType_Id = (int)row["VehicleType_Id"];
                             temp.Name = row["Name"].ToString();
                             temp.Office_Name = row["Office_Name"].ToString();
                             temp.StartDate = (DateTime)row["StartDate"];
                             temp.EndDate = (DateTime)row["EndDate"];
 
                             if (row["PercentReduc"] != DBNull.Value) temp.PercentReduc = (byte)row["PercentReduc"];
-                            if (row["FixedReduc"] != DBNull.Value) temp.FixedReduc = (int)row["FixedReduc"];
+                            if (row["FixedReduc"] != DBNull.Value) temp.FixedReduc = (decimal)row["FixedReduc"];
 
                             _promos.Add(temp);
                         }

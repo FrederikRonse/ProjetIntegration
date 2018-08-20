@@ -21,10 +21,6 @@ namespace WebApplication1.Controllers
         // GET: Promos
         public ActionResult Index(string officeName)
         {
-            if (officeName == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             BO.SlctdFilters _slctdFilters = new BO.SlctdFilters();
 
             //Récupération des options et sauvegarde en session.
@@ -35,9 +31,7 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             Session["filters"] = _filters;
-
-
-            return View("Fleet", GetPromosByOffice(_filters.LstOffices.SelectedValue.ToString()));
+            return View(GetPromosByOffice(_filters.LstOffices.SelectedValue.ToString()));
         }
 
         /// <summary>
@@ -109,9 +103,9 @@ namespace WebApplication1.Controllers
         /// <param name="promo"></param>
         /// <param name="vMvehicle"></param>
         /// <returns></returns>
-        public int GetTotalPromo(VMPromo promo, VMvehicle vMvehicle)
+        public decimal GetTotalPromo(VMPromo promo, VMvehicle vMvehicle)
         {
-            int _promoTotal = 0;
+            decimal _promoTotal = 0;
             List<BO.Promo> _promos = BL.BLPromo.GetPromosForVehicleType(promo.VehicleType_Id, promo.Office_Name);
             if (_promos.Count != 0)
             {
