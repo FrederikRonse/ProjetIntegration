@@ -64,57 +64,52 @@
                 <a class="btn navbar-btn ml-2 text-white btn-secondary">
                     <i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in
                 </a>
-                <a class="btn navbar-btn ml-2 text-white btn-secondary">
-                    <i class="fa d-inline fa-lg fa-user-circle-o"></i>&nbsp;Lang
-                    <ul>
-                        <li>@Html.ActionLink("FR", "SetCulture", "Home", new { culture = "fr" }, null)</li>
-                        <li>@Html.ActionLink("EN", "SetCulture", "Home", new { culture = "en" }, null)</li>
-                    </ul>
-                </a>
+                    @Html.ActionLink("FR", "SetCulture", "Home", new { culture = "fr" }, new {@class="btn navbar-btn ml-2 text-white btn-secondary"})
+                    @Html.ActionLink("EN", "SetCulture", "Home", new { culture = "en" }, new { @class = "btn navbar-btn ml-2 text-white btn-secondary" })
             </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <div class=" bg-primary">
-                <div class="container bg-primary">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <ul class="list-unstyled text-center">
-                                <br>
-                                <a href="#" class="text-dark">About</a>
-                                <br>
-                                <br>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="list-unstyled text-center">
-                                <br>
-                                <a href="#" class="text-dark">General Sales Condition</a>
-                                <br>
-                                <br>
-                                <p> @DateTime.Now.Year &copy; </p>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="list-unstyled text-center">
-                                <br>
-                                <a href="#" class="text-dark">F.A.Q.</a>
-                                <br>
-                                <br>
-                            </ul>
-                        </div>
                     </div>
+                </nav>
+                <div class="container body-content">
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <div class=" bg-primary">
+                            <div class="container bg-primary">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <ul class="list-unstyled text-center">
+                                            <br>
+                                            <a href="#" class="text-dark">About</a>
+                                            <br>
+                                            <br>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="list-unstyled text-center">
+                                            <br>
+                                            <a href="#" class="text-dark">General Sales Condition</a>
+                                            <br>
+                                            <br>
+                                            <p> @DateTime.Now.Year &copy; </p>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="list-unstyled text-center">
+                                            <br>
+                                            <a href="#" class="text-dark">F.A.Q.</a>
+                                            <br>
+                                            <br>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
-            </div>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @*  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>*@
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                @Scripts.Render("~/bundles/jquery")
+                    @*  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>*@
+                                        @Scripts.Render("~/bundles/bootstrap")
+                                        @RenderSection("scripts", required: false)
 </body>
 </html>
