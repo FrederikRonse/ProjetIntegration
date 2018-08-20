@@ -29,8 +29,8 @@ namespace BL
                         DataRowView row = _table.DefaultView[0];
                         Rent temp = new Rent();
                         temp.Id = (int)row["Id"];
-                        temp.VehicleId = (int)row["Vehicle_Id"];
-                            temp.CstmrId = (int)row["Customer_Id"];
+                        temp.VehicleTypeId = (int)row["Vehicle_Id"];
+                        temp.CstmrId = (int)row["Customer_Id"];
                         temp.ReservationDate = (DateTime)row["ReservationDate"];
                         temp.StartDate = (DateTime)row["StartDate"];
                         temp.EndDate = (DateTime)row["EndDate"];
@@ -44,7 +44,7 @@ namespace BL
                             temp.ReturnDate = (DateTime)row["ReturnDate"];
                         }
                         if (row["Employee_Id"] != DBNull.Value)
-                        temp.EmployeeId = (int)row["Employee_Id"];
+                            temp.EmployeeId = (int)row["Employee_Id"];
 
                         _rent = temp;
                     }
@@ -84,7 +84,7 @@ namespace BL
                             Rent temp = new Rent
                             {
                                 Id = (int)row["Id"],
-                                VehicleId = (int)row["Vehicle_Id"],
+                                VehicleTypeId = (int)row["Vehicle_Id"],
                                 CstmrId = (int)row["Customer_Id"],
                                 ReservationDate = (DateTime)row["ReservationDate"],
                                 StartDate = (DateTime)row["StartDate"],
@@ -124,16 +124,17 @@ namespace BL
         /// Création d'une réservation.
         /// </summary>
         /// <param name="newRent"></param>
-        public static void CreateRent(Rent newRent)
+        public static int CreateRent(Rent newRent)
         {
+            int _carNumber = 0;
+
             if (newRent == null)
             {
                 throw new ArgumentNullException(nameof(newRent));
             }
             try
             {
-                
-                DalRent.CreateRent(newRent.VehicleId, newRent.CstmrId, newRent.StartDate, newRent.EndDate, newRent.ToPay, newRent.Paid, (int)newRent.EmployeeId);
+                _carNumber = DalRent.CreateRent(newRent.VehicleTypeId, newRent.CstmrId, newRent.StartDate, newRent.EndDate, newRent.ToPay, newRent.Paid, (int)newRent.EmployeeId);
             }
             #region Catch
             catch (CstmEx cstmEx)
@@ -145,6 +146,7 @@ namespace BL
                 throw new CstmEx(ExType.srvrError, ex);
             }
             #endregion Catch
+            return _carNumber;
         }
 
         /// <summary>
@@ -159,7 +161,7 @@ namespace BL
             }
             try
             {
-                DalRent.UpdateRent(id:rentToUpdate.Id, vehicle_Id:rentToUpdate.VehicleId, customer_Id: rentToUpdate.CstmrId, startDate: rentToUpdate.StartDate, endDate:rentToUpdate.EndDate, toPay:rentToUpdate.ToPay, isClosed:rentToUpdate.IsClosed, paid:rentToUpdate.Paid);
+                DalRent.UpdateRent(id: rentToUpdate.Id, vehicle_Id: rentToUpdate.VehicleTypeId, customer_Id: rentToUpdate.CstmrId, startDate: rentToUpdate.StartDate, endDate: rentToUpdate.EndDate, toPay: rentToUpdate.ToPay, isClosed: rentToUpdate.IsClosed, paid: rentToUpdate.Paid);
             }
             #region Catch
             catch (CstmEx cstmEx)

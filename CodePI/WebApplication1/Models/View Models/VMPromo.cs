@@ -27,6 +27,7 @@ namespace WebApplication1.Models.View_Models
         [Display(Name = "PercentReduc", ResourceType = typeof(Resource))]
         public byte? PercentReduc { get; set; }
         [Display(Name = "FixedReduc", ResourceType = typeof(Resource))]
+        [DataType(DataType.Currency)]
         public decimal? FixedReduc { get; set; }
     }
 }

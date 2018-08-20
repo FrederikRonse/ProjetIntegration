@@ -241,6 +241,24 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Vehicle reservation is confirmed!.
+        /// </summary>
+        public static string RentConfirmationMsg {
+            get {
+                return ResourceManager.GetString("RentConfirmationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rent Confirmation.
+        /// </summary>
+        public static string RentConfirmationTitle {
+            get {
+                return ResourceManager.GetString("RentConfirmationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rent a Car.
         /// </summary>
         public static string RentLink {

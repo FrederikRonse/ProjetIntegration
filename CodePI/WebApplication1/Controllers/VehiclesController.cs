@@ -141,7 +141,32 @@ namespace WebApplication1.Controllers
             return _vMvehicle;
         }
 
+        [HttpGet]
+        public ActionResult Rent( )
+        {
+            throw new NotImplementedException();
+        }
 
+        [HttpPost]
+        public ActionResult Rent(VMvehicle vMvehicle)
+        {
+            if (ModelState.IsValid)
+            {//TODO _rent.CstmrId  & _employeeId
+                int _cstmrId = new int();
+                int _employeeId= new int();
+                decimal _paid = 0;
+                
+                BO.Rent _rent = new BO.Rent() {VehicleTypeId=vMvehicle.TypeId, CstmrId= _cstmrId, EmployeeId= _employeeId, ReservationDate = DateTime.Now, StartDate =vMvehicle.StartDate, EndDate=vMvehicle.EndDate, ToPay=vMvehicle.PriceToPay, Paid= _paid };
+
+                int _carNumber=BL.BLRent.CreateRent(_rent);
+
+                VMRent _vmRent = new VMRent() {CarNumber= _carNumber, VehicleTypeId = _rent.VehicleTypeId, CstmrId = _rent.CstmrId, EmployeeId = _rent.EmployeeId, ReservationDate = _rent.ReservationDate, StartDate = _rent.StartDate, EndDate = _rent.EndDate, ToPay = _rent.ToPay, Paid = _rent.Paid };
+
+                return View(_vmRent);    //rentConfirmation
+            }
+            
+            return RedirectToAction("Index", "Home");
+        }
 
 
         /// PAS UTILISE : Problème pour sérialiser etpasser une instance VMvehicle apd la vue.

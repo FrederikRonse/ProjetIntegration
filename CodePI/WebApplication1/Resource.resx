@@ -207,6 +207,12 @@
   <data name="PromoName" xml:space="preserve">
     <value>Promotion</value>
   </data>
+  <data name="RentConfirmationMsg" xml:space="preserve">
+    <value>Your Vehicle reservation is confirmed!</value>
+  </data>
+  <data name="RentConfirmationTitle" xml:space="preserve">
+    <value>Rent Confirmation</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
   </data>

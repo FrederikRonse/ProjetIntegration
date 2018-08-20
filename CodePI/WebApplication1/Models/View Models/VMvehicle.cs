@@ -23,12 +23,17 @@ namespace WebApplication1.Models.View_Models
         public int TypeId { get; set; }
         [Display(Name = "MakeName", ResourceType = typeof(Resource))]
         public string MakeName { get; set; }
+
         [Display(Name = "ModelName", ResourceType = typeof(Resource))]
         public string ModelName { get; set; }
+
         [Display(Name = "DailyPrice", ResourceType = typeof(Resource))]
+        [DataType(DataType.Currency)]
         public int DailyPrice { get; set; }
+
         [Display(Name = "StartDate", ResourceType = typeof(Resource))]
         public DateTime StartDate { get; set; }
+
         [Display(Name = "EndDate", ResourceType = typeof(Resource))]
         public DateTime EndDate
         {
@@ -45,18 +50,27 @@ namespace WebApplication1.Models.View_Models
         [Display(Name = "Ndays", ResourceType = typeof(Resource))]
         [Range(1, 31)]
         public byte Ndays { get; set; }
+
         [Display(Name = "PromoTotal", ResourceType = typeof(Resource))]
+        [DataType(DataType.Currency)]
         public int PromoTotal { get; set; }
+
         [Display(Name = "PriceToPay", ResourceType = typeof(Resource))]
+        [DataType(DataType.Currency)]
         public int PriceToPay { get; set; }
+
         [Display(Name = "DoorsCount", ResourceType = typeof(Resource))]
         public byte DoorsCount { get; set; }
+
         [Display(Name = "FuelName", ResourceType = typeof(Resource))]
         public string FuelName { get; set; }
+
         [Display(Name = "CCName", ResourceType = typeof(Resource))]
         public string CCName { get; set; }
+
         [ScaffoldColumn(false)]
         public string PicPath { get; set; }
+
         [ScaffoldColumn(false)]
         public string PicLabel { get; set; }
     }

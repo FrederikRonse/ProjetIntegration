@@ -214,6 +214,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\View Models\VMRent.cs" />
     <Compile Include="Models\View Models\VMPromo.cs" />
     <Compile Include="Models\View Models\VMvehiclesWfilters.cs" />
     <Compile Include="Models\View Models\VMvehicle.cs" />
@@ -296,6 +297,7 @@
     <Content Include="Views\Vehicles\Fleet.cshtml" />
     <Content Include="Views\Vehicles\VehicleDetails.cshtml" />
     <Content Include="Views\Promos\Index.cshtml" />
+    <Content Include="Views\Vehicles\RentConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
