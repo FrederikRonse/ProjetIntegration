@@ -21,15 +21,15 @@ namespace WebApplication1.Models.View_Models
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
         public int TypeId { get; set; }
-        [Display(Name = "Make")]
+        [Display(Name = "MakeName", ResourceType = typeof(Resource))]
         public string MakeName { get; set; }
-        [Display(Name = "Model")]
+        [Display(Name = "ModelName", ResourceType = typeof(Resource))]
         public string ModelName { get; set; }
-        [Display(Name = "Daily Price")]
+        [Display(Name = "DailyPrice", ResourceType = typeof(Resource))]
         public int DailyPrice { get; set; }
-        [Display(Name = "Start Date")]
+        [Display(Name = "StartDate", ResourceType = typeof(Resource))]
         public DateTime StartDate { get; set; }
-        [Display(Name = "End Date")]
+        [Display(Name = "EndDate", ResourceType = typeof(Resource))]
         public DateTime EndDate
         {
             get { return this._endDate; }
@@ -42,18 +42,18 @@ namespace WebApplication1.Models.View_Models
                 (byte)(EndDate - StartDate).Days : (byte)1;
             } // un jour minimum. 
         }
-        [Display(Name = "Duration")]
+        [Display(Name = "Ndays", ResourceType = typeof(Resource))]
         [Range(1, 31)]
         public byte Ndays { get; set; }
-        [Display(Name = "Reduction")]
+        [Display(Name = "PromoTotal", ResourceType = typeof(Resource))]
         public int PromoTotal { get; set; }
-        [Display(Name = "Price")]
+        [Display(Name = "PriceToPay", ResourceType = typeof(Resource))]
         public int PriceToPay { get; set; }
-        [Display(Name = "Number of Doors")]
+        [Display(Name = "DoorsCount", ResourceType = typeof(Resource))]
         public byte DoorsCount { get; set; }
-        [Display(Name = "Type of Fuel")]
+        [Display(Name = "FuelName", ResourceType = typeof(Resource))]
         public string FuelName { get; set; }
-        [Display(Name = "Engine")]
+        [Display(Name = "CCName", ResourceType = typeof(Resource))]
         public string CCName { get; set; }
         [ScaffoldColumn(false)]
         public string PicPath { get; set; }

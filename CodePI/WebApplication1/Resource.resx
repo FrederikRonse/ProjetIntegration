@@ -121,43 +121,43 @@
     <value>My Account</value>
   </data>
   <data name="CCName" xml:space="preserve">
-    <value />
+    <value>Engine</value>
   </data>
   <data name="DailyPrice" xml:space="preserve">
-    <value />
+    <value>Daily Price</value>
   </data>
   <data name="DealsLink" xml:space="preserve">
     <value>Deals</value>
   </data>
   <data name="DoorsCount" xml:space="preserve">
-    <value />
+    <value>Number of Doors</value>
   </data>
   <data name="FleetLink" xml:space="preserve">
     <value>Fleet</value>
   </data>
   <data name="FuelName" xml:space="preserve">
-    <value />
+    <value>Type of Fuel</value>
   </data>
   <data name="lblPickupPlace" xml:space="preserve">
     <value>Pick-up Place</value>
   </data>
   <data name="MakeName" xml:space="preserve">
-    <value />
+    <value>Make</value>
   </data>
   <data name="ModelName" xml:space="preserve">
-    <value />
+    <value>Model</value>
   </data>
   <data name="Ndays" xml:space="preserve">
-    <value />
+    <value>Duration</value>
   </data>
   <data name="NewSearch" xml:space="preserve">
     <value>New Search</value>
   </data>
   <data name="PriceToPay" xml:space="preserve">
-    <value />
+    <value>Price to Pay</value>
   </data>
   <data name="PromoTotal" xml:space="preserve">
-    <value />
+    <value>Promotion (Total)</value>
   </data>
   <data name="RentLink" xml:space="preserve">
     <value>Rent a Car</value>
@@ -191,5 +191,23 @@
   </data>
   <data name="BackToList" xml:space="preserve">
     <value>Back to List</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="FixedReduc" xml:space="preserve">
+    <value>€ off</value>
+  </data>
+  <data name="Office_Name" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="PercentReduc" xml:space="preserve">
+    <value>% off</value>
+  </data>
+  <data name="PromoName" xml:space="preserve">
+    <value>Promotion</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
   </data>
 </root>

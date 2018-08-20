@@ -79,7 +79,7 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Engine.
         /// </summary>
         public static string CCName {
             get {
@@ -88,7 +88,7 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Daily Price.
         /// </summary>
         public static string DailyPrice {
             get {
@@ -106,11 +106,29 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Number of Doors.
         /// </summary>
         public static string DoorsCount {
             get {
                 return ResourceManager.GetString("DoorsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to € off.
+        /// </summary>
+        public static string FixedReduc {
+            get {
+                return ResourceManager.GetString("FixedReduc", resourceCulture);
             }
         }
         
@@ -124,7 +142,7 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Type of Fuel.
         /// </summary>
         public static string FuelName {
             get {
@@ -142,7 +160,7 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Make.
         /// </summary>
         public static string MakeName {
             get {
@@ -151,7 +169,7 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Model.
         /// </summary>
         public static string ModelName {
             get {
@@ -160,7 +178,7 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Duration.
         /// </summary>
         public static string Ndays {
             get {
@@ -178,7 +196,25 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Office.
+        /// </summary>
+        public static string Office_Name {
+            get {
+                return ResourceManager.GetString("Office_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to % off.
+        /// </summary>
+        public static string PercentReduc {
+            get {
+                return ResourceManager.GetString("PercentReduc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price to Pay.
         /// </summary>
         public static string PriceToPay {
             get {
@@ -187,7 +223,16 @@ namespace WebApplication1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Promotion.
+        /// </summary>
+        public static string PromoName {
+            get {
+                return ResourceManager.GetString("PromoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion (Total).
         /// </summary>
         public static string PromoTotal {
             get {
@@ -273,6 +318,15 @@ namespace WebApplication1 {
         public static string SelectPlace {
             get {
                 return ResourceManager.GetString("SelectPlace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
             }
         }
         
