@@ -12,11 +12,13 @@ namespace WebApplication1.Models.View_Models
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
         public int CarNumber { get; set; }
-
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredField")]
+        [StringLength(255, ErrorMessageResourceName = "StringLengthMessage", ErrorMessageResourceType = typeof(Resource))]
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
         public int VehicleTypeId { get; set; }
-
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredField")]
+        [StringLength(255, ErrorMessageResourceName = "StringLengthMessage", ErrorMessageResourceType = typeof(Resource))]
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
         public int CstmrId { get; set; }
@@ -24,7 +26,8 @@ namespace WebApplication1.Models.View_Models
         [ScaffoldColumn(false)]
         [Range(0, int.MaxValue)]
         public int? EmployeeId { get; set; }
-
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredField")]
+        [StringLength(255, ErrorMessageResourceName = "StringLengthMessage", ErrorMessageResourceType = typeof(Resource))]
         [Display(Name = "Office_Name", ResourceType = typeof(Resource))]
         public string Office_Name { get; set; }
 

@@ -268,11 +268,38 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rents.
+        /// </summary>
+        public static string RentListMsg {
+            get {
+                return ResourceManager.GetString("RentListMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Rents.
+        /// </summary>
+        public static string RentListTitle {
+            get {
+                return ResourceManager.GetString("RentListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rent This Car.
         /// </summary>
         public static string RentThisLink {
             get {
                 return ResourceManager.GetString("RentThisLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required Field!.
+        /// </summary>
+        public static string RequiredField {
+            get {
+                return ResourceManager.GetString("RequiredField", resourceCulture);
             }
         }
         

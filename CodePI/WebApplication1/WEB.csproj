@@ -202,6 +202,7 @@
     <Compile Include="BLweb\BLweb.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PromosController.cs" />
@@ -303,6 +304,7 @@
     <Content Include="Views\Vehicles\VehicleDetails.cshtml" />
     <Content Include="Views\Promos\Index.cshtml" />
     <Content Include="Views\Vehicles\RentConfirmation.cshtml" />
+    <Content Include="Views\Customer\CustomerRents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

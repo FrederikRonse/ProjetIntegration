@@ -216,4 +216,13 @@
   <data name="vDetailsLink" xml:space="preserve">
     <value>Plus d'infos</value>
   </data>
+  <data name="RentListMsg" xml:space="preserve">
+    <value>Réservations</value>
+  </data>
+  <data name="RentListTitle" xml:space="preserve">
+    <value>Vos réservations</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Champs requis !</value>
+  </data>
 </root>

@@ -58,7 +58,7 @@
                     </li>
                     <li class="nav-item">
                         <i class="fa d-inline fa-lg fa-bookmark-o"></i> @*TODO Changer nom icone.*@
-                        @Html.ActionLink(Resource.AccountLink, "Account", "Clients")
+                        @Html.ActionLink(Resource.AccountLink, "CustomerDetails", "customers")
                     </li>
                 </ul>
                 <a class="btn navbar-btn ml-2 text-white btn-secondary">
@@ -80,6 +80,7 @@
                                         <ul class="list-unstyled text-center">
                                             <br>
                                             <a href="#" class="text-dark">About</a>
+                                            @*<a href=@Html.Action("About", new {@class="text-dark"})>About</a>*@
                                             <br>
                                             <br>
                                         </ul>

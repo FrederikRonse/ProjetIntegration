@@ -164,7 +164,6 @@ namespace WebApplication1.Controllers
 
                 return View(_vmRent);    //rentConfirmation
             }
-            
             return RedirectToAction("Index", "Home");
         }
 

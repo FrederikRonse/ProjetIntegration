@@ -19,8 +19,10 @@
                         @* @Html.DropDownList("officeFilter", (SelectList)Session["lstOffices"], "Select the pick-up place", new { @class = "form-control" })  @*new { @class = "form-control", onchange = "this.form.submit();" })*@
                     </div>
                     <button type="submit" class="btn btn-primary my-3">@Resource.Search</button>
+                    <div> @Html.ValidationMessageFor(m=>m.LstOffices.SelectedValue) </div>
                 }
             </div>
+            
 
 
             <div class="col-md-6">

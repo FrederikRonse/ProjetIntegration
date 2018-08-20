@@ -117,6 +117,22 @@ namespace WebApplication1.Controllers
 
         }
 
+
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
         /// <summary>
         /// Rafraîchi la liste d'options en session et 
         /// passe la main au VehicleController pour la 
