@@ -127,9 +127,63 @@ namespace DAL
         }
 
         /// <summary>
+        /// retourne d'un type de véhicule par son ID.
+        /// </summary>
+        /// <param name="vehicleType_Id"></param>
+        /// <returns></returns>
+        public static DataTable GetVehicleTypeById(int vehicleType_Id)
+        {
+            DataTable __dataToReturn = null;
+
+            using (SqlConnection connection = UtilsDAL.GetConnection())
+            {
+                StringBuilder __sLog = new StringBuilder();
+                SqlParameter _param1 = new SqlParameter("@id", vehicleType_Id);
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("SchCommon.GetVehicleTypeById", connection))
+                    {
+                        DataTable dataTemp = new DataTable();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add(_param1);
+                        SqlDataAdapter datadapt = new SqlDataAdapter(command);
+                        __sLog.Append("Open");
+                        connection.Open();
+                        __sLog.Append("Fill");
+                        datadapt.Fill(dataTemp);
+                        __dataToReturn = dataTemp;
+                    }
+                }
+                #region Catch
+                catch (SqlException sqlEx)
+                {
+                    sqlEx.Data.Add("Log", __sLog);
+
+                    switch (sqlEx.Number)
+                    {
+                        case 4060:
+                            throw new CstmEx(ExType.badDB, sqlEx); //"Mauvaise base de données"
+                        case 18456:
+                            throw new CstmEx(ExType.badPWD, sqlEx); //"Mauvais mot de passe"
+
+                        default:
+                            throw new CstmEx(ExType.notHandledSql, sqlEx); //"Erreur SQL non traitée !" L'exception sera rError_Layerancée.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Data.Add("Log", __sLog);
+                    throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
+                }
+                #endregion Catch
+            }
+            return __dataToReturn;
+        }
+
+        /// <summary>
         /// retourne un véhicule par son ID.
         /// </summary>
-        /// <param name="vehicle_Id"></param>
+        /// <param name="vehicleType_Id"></param>
         /// <returns></returns>
         public static DataTable GetVehicleById(int vehicle_Id)
         {

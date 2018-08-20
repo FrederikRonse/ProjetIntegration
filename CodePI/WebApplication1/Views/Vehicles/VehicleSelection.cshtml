@@ -19,6 +19,9 @@
 <table class="table">
     <tr>
         <th>
+            @*@Html.DisplayNameFor(model => model.MakeName)*@
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.MakeName)
         </th>
         <th>
@@ -52,6 +55,9 @@
     {
     <tr>
         <td>
+            <img src="@Url.Content(item.PicPath)" alt=@item.PicLabel title=@item.PicLabel style="height:215px; width:385px"/> @*style="height:275px; width:275px"*@
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.MakeName)
         </td>
         <td>
@@ -81,7 +87,7 @@
         <td>
 
             @Html.ActionLink(Resource.RentThisLink, "Rent", new { typeId = item.TypeId })
-            @Html.ActionLink(@Resource.vDetailsLink, "GetVehicleDetails", new { typeId = item.TypeId, startDate = item.StartDate, endDate = item.EndDate })
+            @Html.ActionLink(@Resource.vDetailsLink, "GetVehicleDetails", new {typeId = item.TypeId, startDate = item.StartDate, endDate = item.EndDate })
         </td>
     </tr>
     }

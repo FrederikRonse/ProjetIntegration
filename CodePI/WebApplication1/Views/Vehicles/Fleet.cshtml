@@ -21,6 +21,10 @@
 </nav>
 <table class="table">
     <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.MakeName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.MakeName)
         </th>
@@ -53,39 +57,43 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MakeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DailyPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ndays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PromoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceToPay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoorsCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuelName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CCName)
-            </td>
-            <td>
+        
+    <tr>
+        <td>
+            <img src="@Url.Content(item.PicPath)" alt=@item.PicLabel title=@item.PicLabel /> @*style="height:275px; width:275px"*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MakeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DailyPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ndays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PromoTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceToPay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoorsCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCName)
+        </td>
+        <td>
 
-                @Html.ActionLink(@Resource.RentThisLink, "Rent", new { id = item.TypeId })
-            </td>
-        </tr>
+            @Html.ActionLink(@Resource.RentThisLink, "Rent", new { id = item.TypeId })
+        </td>
+    </tr>
     }
 
 </table>

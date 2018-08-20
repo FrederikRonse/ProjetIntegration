@@ -83,7 +83,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BO.VehicleDetails _vehicleToConvert = BL.BLVehicle.GetVehicle((int)typeId);
+            BO.VehicleDetails _vehicleToConvert = BL.BLVehicle.GetVehicleTypeById((int)typeId);
             if (_vehicleToConvert == null)
             {
                 return HttpNotFound();
@@ -144,7 +144,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Rent( )
         {
-            throw new NotImplementedException();
+           return RedirectToAction("Fleet");
+            //throw new NotImplementedException();
         }
 
         [HttpPost]

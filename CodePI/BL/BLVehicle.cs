@@ -86,43 +86,6 @@ namespace BL
             #endregion Catch
         }
 
-        /// <summary>
-        /// retourne un véhicle par son ID, sans détails
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static VehicleShort GetVehicleShort(int id)
-        {
-            VehicleShort _vehicleToReturn = new VehicleShort();
-            try
-            {
-                DataTable _table = DalVehicle.GetVehicleById(id);
-                if (_table != null)
-                {
-                    if (_table.Rows.Count != 0)
-                    {
-                        DataRowView row = _table.DefaultView[0];
-                        VehicleShort temp = new VehicleShort();
-                        temp.Id = (int)row["Id"];
-                        temp.TypeId = (int)row["Vehicle_Id"];
-                        temp.TarifId = (int)row["Customer_Id"];
-                        _vehicleToReturn = temp;
-                    }
-                }
-                return _vehicleToReturn;
-            }
-            #region Catch
-            catch (CstmEx cstmEx)
-            {
-                throw new CstmEx(ExType.dtaRead, cstmEx);
-            }
-            catch (Exception ex)
-            {
-                throw new CstmEx(ExType.srvrError, ex);
-            }
-            #endregion Catch
-        }
-
 
         /// <summary>
         /// Récupération d'un véhicule avec détails.
@@ -178,6 +141,59 @@ namespace BL
             #endregion Catch
         }
 
+        /// <summary>
+        /// Récupération d'un type de véhicule avec détails.
+        /// Photos optionnelles.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="withPics"></param>
+        /// <returns></returns>
+        public static VehicleDetails GetVehicleTypeById(int id, bool withPics = true)
+        {
+            VehicleDetails _vehicleToReturn = new VehicleDetails();
+            try
+            {
+                DataTable _table = DalVehicle.GetVehicleTypeById(id);
+                if (_table != null)
+                {
+                    if (_table.Rows.Count != 0)
+                    {
+                        DataRowView row = _table.DefaultView[0];
+                        VehicleDetails temp = new VehicleDetails();
+                        VehicleType vehicleType = new VehicleType();
+                        temp.VehicleId = (int)row["Id"];
+                        temp.OfficeName = row["Office_name"].ToString();
+                        temp.DailyPrice = (decimal)row["DailyPrice"];
+                        // Ajout des caractèristiques "type"
+                        vehicleType.Id = (int)row["VehicleType_Id"];
+                        vehicleType.MakeName = row["Make_name"].ToString();
+                        vehicleType.ModelName = row["Model_Name"].ToString();
+                        vehicleType.FuelName = row["Fuel_Name"].ToString();
+                        vehicleType.CCName = row["CC_Name"].ToString();
+                        vehicleType.DoorsCount = (byte)row["Doors_Count"];
+                        temp.VehicleType = vehicleType;
+                        // récup des images.
+                        if (withPics == true)
+                        {
+                            List<Picture> pics = Getpics(vehicleType.Id);
+                            if (pics != null) temp.Pictures = pics;
+                        }
+                        _vehicleToReturn = temp;
+                    }
+                }
+                return _vehicleToReturn;
+            }
+            #region Catch
+            catch (CstmEx cstmEx)
+            {
+                throw new CstmEx(ExType.dtaRead, cstmEx);
+            }
+            catch (Exception ex)
+            {
+                throw new CstmEx(ExType.srvrError, ex);
+            }
+            #endregion Catch
+        }
 
         /// <summary>
         /// Retourne la liste filtrée des véhicules.
@@ -275,6 +291,44 @@ namespace BL
                     }
                 }
                 return _pics;
+            }
+            #region Catch
+            catch (CstmEx cstmEx)
+            {
+                throw new CstmEx(ExType.dtaRead, cstmEx);
+            }
+            catch (Exception ex)
+            {
+                throw new CstmEx(ExType.srvrError, ex);
+            }
+            #endregion Catch
+        }
+
+
+        /// <summary>
+        /// retourne un véhicle par son ID, sans détails
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static VehicleShort GetVehicleShort(int id)
+        {
+            VehicleShort _vehicleToReturn = new VehicleShort();
+            try
+            {
+                DataTable _table = DalVehicle.GetVehicleById(id);
+                if (_table != null)
+                {
+                    if (_table.Rows.Count != 0)
+                    {
+                        DataRowView row = _table.DefaultView[0];
+                        VehicleShort temp = new VehicleShort();
+                        temp.Id = (int)row["Id"];
+                        temp.TypeId = (int)row["Vehicle_Id"];
+                        temp.TarifId = (int)row["Customer_Id"];
+                        _vehicleToReturn = temp;
+                    }
+                }
+                return _vehicleToReturn;
             }
             #region Catch
             catch (CstmEx cstmEx)
