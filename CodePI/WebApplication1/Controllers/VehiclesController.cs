@@ -14,6 +14,27 @@ namespace WebApplication1.Controllers
     public class VehiclesController : BaseController
     {
 
+        /// <summary>
+        /// Affiche la flotte de l'agence en session
+        /// ou l'ensemble de la flotte (AirCar).
+        /// </summary>
+        /// <param name="officeName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Fleet(string officeName)
+        {
+            BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();
+
+            //Récupération des options et sauvegarde en session.
+            VMvehicleFilters _filters = (VMvehicleFilters)(Session["filters"]) ?? BLweb.BLweb.SetDefaultFilters(officeName);
+            if (_filters.LstOffices.SelectedValue == null) _filters = BLweb.BLweb.SetDefaultFilters(officeName);
+            Session["filters"] = _filters;
+            ViewBag.selectList = _filters.LstOffices; //pour dropdown.
+                                                      // Récup des véhicules à afficher.
+            _vehiclefilter.OfficeName = _filters.LstOffices.SelectedValue.ToString();
+            TempData["vehiclefilter"] = _vehiclefilter; // pour passage à GetVehiclesByFilter()
+            return View("Fleet", GetVehiclesByFilter());
+        }
 
         /// <summary>
         /// Affiche les véhicules corespondants aux critères choisis.
@@ -120,55 +141,6 @@ namespace WebApplication1.Controllers
             return _vMvehicle;
         }
 
-
-        /// <summary>
-        /// Affiche la flotte de l'agence en session
-        /// ou l'ensemble de la flotte (AirCar).
-        /// </summary>
-        /// <param name="officeName"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Fleet(string officeName)
-        {
-            VMvehicleFilters _filters = new VMvehicleFilters();
-            BO.SlctdFilters _vehiclefilter = new BO.SlctdFilters();
-
-            //Récupération des options.
-            if (Session["filters"] != null) _filters = (VMvehicleFilters)(Session["filters"]);
-            else
-            {// Génère les listes des options de filtre en session.
-                BO.FilterOptions _filterOptions = BL.BLVehicle.GetFilterOptions();
-                if (_filterOptions.lstOffices.Contains("AirCar Belgium")) _filterOptions.lstOffices.Remove("AirCar Belgium");
-                _filters.LstOffices = new SelectList(_filterOptions.lstOffices);
-                _filters.LstMakes = new SelectList(_filterOptions.lstMakes);
-                _filters.LstFuels = new SelectList(_filterOptions.lstFuels);
-                _filters.LstDoors = new SelectList(_filterOptions.lstDoors);
-            }
-            // Selection de l'agence (office) à utiliser.
-            //Si pas de paramètres fournis, flotte de l'agence en session
-            //ou de la première agence de la liste.
-            SelectList _selectList = _filters.LstOffices;
-            string _slctdOffice;
-            var test = _selectList.First();
-            //  test = _selectList.SingleOrDefault(p => p.Value.ToString() !="");
-            test = _selectList.First(p => p.Text != "Anvers");
-            test = _selectList.SingleOrDefault(p => p.Text == "Liège");
-            test = _selectList.ElementAt(1);
-            _slctdOffice = (string.IsNullOrEmpty(officeName) != true) ? officeName :
-                                  (_selectList.SelectedValue != null) ? _selectList.SelectedValue.ToString() :  // Si une agence a déjà été sélectionnée (via Session["slctdOffice").
-                                                                         _selectList.ElementAt(1).Text;  // sinon (en cas de session expirée) 
-            _selectList.Select(x => x.Value == _slctdOffice);
-            ViewBag.selectList = _selectList;
-            // Sauvegarde de l'éventuelle modif d'agence en session.
-            _filters.LstOffices = _selectList;
-            Session["filters"] = _filters;
-
-
-            // Récup des véhicules à afficher.
-            _vehiclefilter.OfficeName = _slctdOffice;
-            TempData["vehiclefilter"] = _vehiclefilter;
-            return View("Fleet", GetVehiclesByFilter());
-        }
 
 
 
