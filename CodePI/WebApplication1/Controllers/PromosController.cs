@@ -12,112 +12,122 @@ namespace WebApplication1.Controllers
 {
     public class PromosController : Controller
     {
-
+        /// <summary>
+        /// Affiche les promos de l'agence en session
+        /// ou par défaut.
+        /// </summary>
+        /// <param name="officeName"></param>
+        /// <returns></returns>
         // GET: Promos
         public ActionResult Index(string officeName)
         {
+            if (officeName == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             BO.SlctdFilters _slctdFilters = new BO.SlctdFilters();
 
             //Récupération des options et sauvegarde en session.
             VMvehicleFilters _filters = (VMvehicleFilters)(Session["filters"]) ?? BLweb.BLweb.SetDefaultFilters(officeName);
             if (_filters.LstOffices.SelectedValue == null) _filters = BLweb.BLweb.SetDefaultFilters(officeName);
-            Session["filters"] = _filters;
-            ViewBag.selectList = _filters.LstOffices; //pour dropdown.
-                                                      // Récup des véhicules à afficher.
-            _slctdFilters.OfficeName = _filters.LstOffices.SelectedValue.ToString();
-            TempData["slctdFilters"] = _slctdFilters; // pour passage à GetVehiclesByFilter()
-            return View("Fleet", GetPromosByOffice( ));
-        }
-
-        [HttpGet]
-        public List<BO.Promo> GetPromosByOffice()
-        {
-            List<VMPromo> _vMvehicles = new List<VMvehicle>();
-            BO.SlctdFilters _slctdFilter = TempData["slctdFilters"] as BO.SlctdFilters;
-
-            List<BO.VehicleDetails> _result = BL.BLVehicle.GetVehicleByFilter(_slctdFilter);
-            if (_result.Count != 0)
+            if (_filters == null)
             {
-                foreach (BO.VehicleDetails item in _result)
-                {
-                    _vMvehicles.Add(ToVMvehicle(item, _slctdFilter.StartDate, _slctdFilter.StartDate));
-                }
+                return HttpNotFound();
             }
-            return _vMvehicles;
-        }
+            Session["filters"] = _filters;
 
-        [HttpGet]
-        //public ActionResult GetVehiclePromos(int? typeId, DateTime startDate, DateTime endDate)
-        //{
-        //    //VMvehicle _vMvehicle = new VMvehicle();
-        //    //if (typeId == null)
-        //    //{
-        //    //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    //}
-        //    //BO.VehicleDetails _vehicleToConvert = BL.BLVehicle.GetVehicle((int)typeId);
-        //    //if (_vehicleToConvert == null)
-        //    //{
-        //    //    return HttpNotFound();
-        //    //}
-        //    //_vMvehicle = ToVMvehicle(_vehicleToConvert, startDate, endDate);
-        //    //return View("VehicleDetails", _vMvehicle);
-        //}
+
+            return View("Fleet", GetPromosByOffice(_filters.LstOffices.SelectedValue.ToString()));
+        }
 
         /// <summary>
-        /// Convertit un VehicleDetails vers un VMvehicle.
+        /// Récupère toutes les promos d'une agence.
         /// </summary>
-        /// <param name="vehicleDetails"></param>
+        /// <param name="officeName"></param>
+        /// <returns></returns>
+        public List<VMPromo> GetPromosByOffice(string officeName)
+        {
+            List<VMPromo> _vMPromos = new List<VMPromo>();
+            // BO.SlctdFilters _slctdFilter = TempData["officeName"] as BO.SlctdFilters;
+
+            List<BO.Promo> _result = BL.BLPromo.GetPromosByOffice(officeName);
+            if (_result.Count != 0)
+            {
+                foreach (BO.Promo item in _result)
+                {
+                    _vMPromos.Add(ToVmPromo(item));
+                }
+            }
+            return _vMPromos;
+        }
+
+        /// <summary>
+        /// Récupère les promos liées à un véhicules.
+        /// </summary>
+        /// <param name="typeId"></param>
+        /// <param name="VehicleType"></param>
+        /// <param name="officeName"></param>
+        /// <returns></returns>
+        public List<VMPromo> GetVehiclePromos(int VehicleType, string officeName)
+        {
+            List<VMPromo> _vMpromo = new List<VMPromo>();
+            List<BO.Promo> _promos = BL.BLPromo.GetPromosForVehicleType(VehicleType, officeName);
+            if (_promos.Count != 0)
+            {
+                foreach (BO.Promo promo in _promos)
+                {
+                    _vMpromo.Add(ToVmPromo(promo));
+                }
+            }
+            return _vMpromo;
+        }
+
+        /// <summary>
+        /// Converti un promo vers un VMvehicle.
+        /// </summary>
+        /// <param name="promo"></param>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public VMvehicle ToVMvehicle(BO.VehicleDetails vehicleDetails, DateTime startDate, DateTime endDate)
+        public VMPromo ToVmPromo(BO.Promo promo)
         {
-            VMvehicle _vMvehicle = new VMvehicle();
-            _vMvehicle.TypeId = vehicleDetails.VehicleType.Id;
-            _vMvehicle.MakeName = vehicleDetails.VehicleType.MakeName;
-            _vMvehicle.ModelName = vehicleDetails.VehicleType.ModelName;
-            _vMvehicle.PicPath = vehicleDetails.Pictures[0].Path;
-            _vMvehicle.PicLabel = vehicleDetails.Pictures[0].Label;
-            _vMvehicle.DailyPrice = (int)vehicleDetails.DailyPrice;
-            _vMvehicle.StartDate = startDate;
-            _vMvehicle.EndDate = endDate;
-            // _vMvehicle.NDays assigné par .EndDate au niveau du modèle.
-            _vMvehicle.PromoTotal = GetTotalPromo();
-            _vMvehicle.PriceToPay = _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal >= 0 ?
-                                    _vMvehicle.DailyPrice * _vMvehicle.Ndays - _vMvehicle.PromoTotal : 0; // Pas de prix négatif (0= gratuit).
-            _vMvehicle.CCName = vehicleDetails.VehicleType.CCName;
-            _vMvehicle.DoorsCount = vehicleDetails.VehicleType.DoorsCount;
-            _vMvehicle.FuelName = vehicleDetails.VehicleType.FuelName;
+            VMPromo _vMPromo = new VMPromo();
+            _vMPromo.PromotionModel_Id = promo.PromotionModel_Id;
+            _vMPromo.VehicleType_Id = promo.VehicleType_Id;
+            _vMPromo.Office_Name = promo.Office_Name;
+            _vMPromo.Name = promo.Name;
+            _vMPromo.StartDate = promo.StartDate;
+            _vMPromo.EndDate = promo.EndDate;
+            _vMPromo.PercentReduc = promo.PercentReduc;
+            _vMPromo.FixedReduc = promo.FixedReduc;
+            return _vMPromo;
+        }
 
-            //calcul du total des promos pour chaque véhicule.
-            int GetTotalPromo()
+        /// <summary>
+        /// calcul du total des promos pour un véhicule.
+        /// </summary>
+        /// <param name="promo"></param>
+        /// <param name="vMvehicle"></param>
+        /// <returns></returns>
+        public int GetTotalPromo(VMPromo promo, VMvehicle vMvehicle)
+        {
+            int _promoTotal = 0;
+            List<BO.Promo> _promos = BL.BLPromo.GetPromosForVehicleType(promo.VehicleType_Id, promo.Office_Name);
+            if (_promos.Count != 0)
             {
-                int _promoTotal = 0;
-                List<BO.Promo> _promos = BL.BLPromo.GetPromosForVehicleType(vehicleDetails.VehicleType.Id, vehicleDetails.OfficeName);
-                if (_promos.Count != 0)
+                byte _totalPercentReduc = 0;
+                int _totalCashReduc = 0;
+                foreach (BO.Promo item in _promos)
                 {
-                    byte _totalPercentReduc = 0;
-                    int _totalCashReduc = 0;
-                    foreach (BO.Promo promo in _promos)
-                    {
-                        byte _currentPcReduc = _totalPercentReduc;
-                        if (promo.PercentReduc != null) _currentPcReduc += (byte)promo.PercentReduc;
-                        if (_currentPcReduc < 100) _totalPercentReduc = _currentPcReduc; // max 100% de réduction.
-                        if (promo.FixedReduc != null) _totalCashReduc += (int)promo.FixedReduc;
-                    }
-                    _promoTotal = (_vMvehicle.DailyPrice * _vMvehicle.Ndays) * _totalPercentReduc / 100 + _totalCashReduc;
+                    byte _currentPcReduc = _totalPercentReduc;
+                    if (item.PercentReduc != null) _currentPcReduc += (byte)item.PercentReduc;
+                    if (_currentPcReduc < 100) _totalPercentReduc = _currentPcReduc; // max 100% de réduction.
+                    if (item.FixedReduc != null) _totalCashReduc += (int)item.FixedReduc;
                 }
-                return _promoTotal;
+                _promoTotal = (vMvehicle.DailyPrice * vMvehicle.Ndays) * _totalPercentReduc / 100 + _totalCashReduc;
             }
-            return _vMvehicle;
+            return _promoTotal;
         }
-
-        // GET: Promos/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
 
     }
 }

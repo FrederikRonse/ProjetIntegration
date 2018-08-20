@@ -295,10 +295,10 @@
     <Content Include="Views\Vehicles\VehicleSelection.cshtml" />
     <Content Include="Views\Vehicles\Fleet.cshtml" />
     <Content Include="Views\Vehicles\VehicleDetails.cshtml" />
+    <Content Include="Views\Promos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Promos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
