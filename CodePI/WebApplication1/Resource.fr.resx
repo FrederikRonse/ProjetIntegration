@@ -225,4 +225,46 @@
   <data name="RequiredField" xml:space="preserve">
     <value>Champs requis !</value>
   </data>
+  <data name="Greatings" xml:space="preserve">
+    <value>Bienvenue</value>
+  </data>
+  <data name="NewCstmrLink" xml:space="preserve">
+    <value>Nouveau Client</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Veuillez vous loguer</value>
+  </data>
+  <data name="RegistrationTitle" xml:space="preserve">
+    <value>Veuillez vous enregister comme nouveau client</value>
+  </data>
+  <data name="UserBDay" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="UserFirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="UserLastName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="UserPassCfrmError" xml:space="preserve">
+    <value>Le mots de passe rentrés ne correspondents pas.</value>
+  </data>
+  <data name="UserPassError" xml:space="preserve">
+    <value>le {0} doit compter au moins {2} charactères .</value>
+  </data>
+  <data name="UserPassword" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="UserPasswordCfrm" xml:space="preserve">
+    <value>Veuillez confirmer le mot de passe</value>
+  </data>
+  <data name="UserPhone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="UserRemember" xml:space="preserve">
+    <value>Se souvenir de moi à la prochaine visite ?</value>
+  </data>
+  <data name="UserRgstrBttn" xml:space="preserve">
+    <value>S'enregister</value>
+  </data>
 </root>

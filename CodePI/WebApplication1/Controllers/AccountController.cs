@@ -151,7 +151,8 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                string _username = (model.UserFirstName != null) ? model.UserFirstName + ' ' + model.UserLastName : "Kéké";
+                var user = new ApplicationUser { UserName = _username, Email = model.Email }; /*new ApplicationUser { UserName = model.Email, Email = model.Email };*/
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

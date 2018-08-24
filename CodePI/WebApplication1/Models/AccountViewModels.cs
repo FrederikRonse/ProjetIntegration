@@ -49,16 +49,19 @@ namespace WebApplication1.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
+        [MaxLength(50)]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        //[Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassError")]
+        [StringLength(100, ErrorMessageResourceName = "UserPassError", ErrorMessageResourceType = typeof(Resource), MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "UserPassword", ResourceType = typeof(Resource))]
         public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
+       
+        [Display(Name = "UserRemember", ResourceType = typeof(Resource))]
         public bool RememberMe { get; set; }
     }
 
@@ -66,38 +69,61 @@ namespace WebApplication1.Models
     {
         [Required]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
+        [MaxLength(50)]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        // TODO corriger our remmettre filtres accoutnviewmodels d'origine
+        //[Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassError")]
+        [StringLength(100, ErrorMessageResourceName = "UserPassError", ErrorMessageResourceType = typeof(Resource), MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "UserPassword", ResourceType = typeof(Resource))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "UserPasswordCfrm", ResourceType = typeof(Resource))]
+        //[Compare("Password", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassCfrmError")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "UserFirstName", ResourceType = typeof(Resource))]
+        [MaxLength(50)]
+        public string UserFirstName { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "UserLastName", ResourceType = typeof(Resource))]
+        [MaxLength(50)]
+        public string UserLastName { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "UserPhone", ResourceType = typeof(Resource))]
+        [MaxLength(50)]
+        public string UserPhone { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "UserBDay", ResourceType = typeof(Resource))]
+        public string UserBDay { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassError")]
+        [StringLength(100, ErrorMessageResourceName = "UserPassError", ErrorMessageResourceType = typeof(Resource), MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "UserPassword", ResourceType = typeof(Resource))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "UserPasswordCfrm", ResourceType = typeof(Resource))]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassCfrmError")]
         public string ConfirmPassword { get; set; }
+
 
         public string Code { get; set; }
     }

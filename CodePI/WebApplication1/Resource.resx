@@ -225,4 +225,46 @@
   <data name="RequiredField" xml:space="preserve">
     <value>Required Field!</value>
   </data>
+  <data name="Greatings" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="NewCstmrLink" xml:space="preserve">
+    <value>New Customer</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Please Log in</value>
+  </data>
+  <data name="RegistrationTitle" xml:space="preserve">
+    <value>Please Register</value>
+  </data>
+  <data name="UserBDay" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
+  <data name="UserFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="UserLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="UserPassCfrmError" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="UserPassError" xml:space="preserve">
+    <value>The {0} must be at least {2} characters long.</value>
+  </data>
+  <data name="UserPassword" xml:space="preserve">
+    <value>Enter a Password</value>
+  </data>
+  <data name="UserPasswordCfrm" xml:space="preserve">
+    <value>Confirm Password please</value>
+  </data>
+  <data name="UserPhone" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="UserRemember" xml:space="preserve">
+    <value>Remember me at next visit ?</value>
+  </data>
+  <data name="UserRgstrBttn" xml:space="preserve">
+    <value>Register</value>
+  </data>
 </root>
