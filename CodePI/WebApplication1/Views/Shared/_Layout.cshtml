@@ -46,19 +46,19 @@
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
                         <i class="fa d-inline fa-lg fa-bookmark-o"></i> @*TODO Changer nom icone.*@
-                        @Html.ActionLink(Resource.RentLink, "Index", "Home", new { @class = "btn navbar-btn ml-2 text-white btn-secondary" })
+                        @Html.ActionLink(Resource.RentLink, "Index", "Home")     @*Pose problème pour le routage => , new { @class = "btn navbar-btn ml-2 text-white btn-secondary" }*@
                     </li>
                     <li class="nav-item">
                         <i class="fa d-inline fa-lg fa-bookmark-o"></i> @*TODO Changer nom icone.*@
-                        @Html.ActionLink(Resource.DealsLink, "Index", "Promos", new { @class = "btn navbar-btn ml-2 text-white btn-secondary" })
+                        @Html.ActionLink(Resource.DealsLink, "Index", "Promos")
                     </li>
                     <li class="nav-item">
                         <i class="fa d-inline fa-lg fa-bookmark-o"></i> @*TODO Changer nom icone.*@
-                        @Html.ActionLink(Resource.FleetLink, "Fleet", "Vehicles", new { @class = "btn navbar-btn ml-2 text-white btn-secondary" })
+                        @Html.ActionLink(Resource.FleetLink, "Fleet", "Vehicles")
                     </li>
                     <li class="nav-item">
                         <i class="fa d-inline fa-lg fa-bookmark-o"></i> @*TODO Changer nom icone.*@
-                        @Html.ActionLink(Resource.AccountLink, "CustomerDetails", "customers", new { @class = "btn navbar-btn ml-2 text-white btn-secondary" })
+                        @Html.ActionLink(Resource.AccountLink, "CustomerDetails", "customers")
                     </li>
                 </ul>
             </ul>
