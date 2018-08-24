@@ -267,4 +267,13 @@
   <data name="UserRgstrBttn" xml:space="preserve">
     <value>S'enregister</value>
   </data>
+  <data name="LoginInvalidAttempt" xml:space="preserve">
+    <value>Tentative de login invalide  (e-mail ou mot de passe).</value>
+  </data>
+  <data name="LoginSubTitle" xml:space="preserve">
+    <value>Loguez-vous via votre e-mail et mot de passe.</value>
+  </data>
+  <data name="RegisterSubTitle" xml:space="preserve">
+    <value>Veuillez créer un nouveau compte client.</value>
+  </data>
 </root>

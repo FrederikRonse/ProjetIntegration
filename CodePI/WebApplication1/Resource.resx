@@ -267,4 +267,13 @@
   <data name="UserRgstrBttn" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="LoginInvalidAttempt" xml:space="preserve">
+    <value>Invalid login attempt (e-mail or password).</value>
+  </data>
+  <data name="LoginSubTitle" xml:space="preserve">
+    <value>Use a local account to log in.</value>
+  </data>
+  <data name="RegisterSubTitle" xml:space="preserve">
+    <value>Please create a new customer account</value>
+  </data>
 </root>

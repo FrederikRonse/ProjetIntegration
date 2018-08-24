@@ -75,7 +75,9 @@ namespace WebApplication1.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var _user = await UserManager.FindByEmailAsync(model.Email); // pour pouvoir se loguer via l'email mais avec userName different.
+            var result = await SignInManager.PasswordSignInAsync(_user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+           // var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -86,7 +88,7 @@ namespace WebApplication1.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", Resource.LoginInvalidAttempt);
                     return View(model);
             }
         }

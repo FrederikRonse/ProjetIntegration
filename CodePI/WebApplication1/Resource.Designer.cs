@@ -169,6 +169,24 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid login attempt (e-mail or password)..
+        /// </summary>
+        public static string LoginInvalidAttempt {
+            get {
+                return ResourceManager.GetString("LoginInvalidAttempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use a local account to log in..
+        /// </summary>
+        public static string LoginSubTitle {
+            get {
+                return ResourceManager.GetString("LoginSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Log in.
         /// </summary>
         public static string LoginTitle {
@@ -264,6 +282,15 @@ namespace WebApplication1 {
         public static string PromoTotal {
             get {
                 return ResourceManager.GetString("PromoTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please create a new customer account.
+        /// </summary>
+        public static string RegisterSubTitle {
+            get {
+                return ResourceManager.GetString("RegisterSubTitle", resourceCulture);
             }
         }
         
