@@ -160,6 +160,15 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Our Fleet.
+        /// </summary>
+        public static string FleetTitle {
+            get {
+                return ResourceManager.GetString("FleetTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type of Fuel.
         /// </summary>
         public static string FuelName {
@@ -295,6 +304,24 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available Deals.
+        /// </summary>
+        public static string PromoSubTitle {
+            get {
+                return ResourceManager.GetString("PromoSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoy our Deals !.
+        /// </summary>
+        public static string PromoTitle {
+            get {
+                return ResourceManager.GetString("PromoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion (Total).
         /// </summary>
         public static string PromoTotal {
@@ -363,6 +390,15 @@ namespace WebApplication1 {
         public static string RentListTitle {
             get {
                 return ResourceManager.GetString("RentListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Rents.
+        /// </summary>
+        public static string RentsLink {
+            get {
+                return ResourceManager.GetString("RentsLink", resourceCulture);
             }
         }
         
@@ -570,6 +606,33 @@ namespace WebApplication1 {
         public static string vDetailsLink {
             get {
                 return ResourceManager.GetString("vDetailsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your selected Vehicle.
+        /// </summary>
+        public static string vehicleDetailSubTitle {
+            get {
+                return ResourceManager.GetString("vehicleDetailSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detailed Description.
+        /// </summary>
+        public static string vehicleDetailTitle {
+            get {
+                return ResourceManager.GetString("vehicleDetailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle Selection.
+        /// </summary>
+        public static string VehicleSelectTitle {
+            get {
+                return ResourceManager.GetString("VehicleSelectTitle", resourceCulture);
             }
         }
     }

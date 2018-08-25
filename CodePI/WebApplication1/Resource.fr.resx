@@ -288,4 +288,25 @@
   <data name="UserName" xml:space="preserve">
     <value>Nom d'utilisateur</value>
   </data>
+  <data name="FleetTitle" xml:space="preserve">
+    <value>Notre Flotte</value>
+  </data>
+  <data name="PromoSubTitle" xml:space="preserve">
+    <value>Promotions disponibles</value>
+  </data>
+  <data name="PromoTitle" xml:space="preserve">
+    <value>Profitez de nos promotions !</value>
+  </data>
+  <data name="RentsLink" xml:space="preserve">
+    <value>Mes locations</value>
+  </data>
+  <data name="vehicleDetailSubTitle" xml:space="preserve">
+    <value>Véhicule sélectionné</value>
+  </data>
+  <data name="vehicleDetailTitle" xml:space="preserve">
+    <value>Description détaillée</value>
+  </data>
+  <data name="VehicleSelectTitle" xml:space="preserve">
+    <value>Selection du véhicule</value>
+  </data>
 </root>

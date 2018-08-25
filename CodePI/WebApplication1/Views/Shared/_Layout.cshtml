@@ -37,7 +37,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink(Resource.AccountLink, "CustomerDetails", "customers")</li>
-                                <li>@Html.ActionLink("Orders", " CustomerRents", "customers")</li>
+                                <li>@Html.ActionLink(Resource.RentLink, " CustomerRents", "customers")</li>
                             </ul>
                         </li>
                     </ul>
@@ -66,8 +66,7 @@
                         <div class="col-md-4">
                             <ul class="list-unstyled text-center">
                                 <br>
-                                <a href="#" class="text-dark">About</a>
-                                @*<a href=@Html.Action("About", new {@class="text-dark"})>About</a>*@
+                                <a href=@Url.Action("About","Home", new { @class = "text-dark" }) >About</a>
                                 <br>
                                 <br>
                             </ul>
@@ -75,7 +74,7 @@
                         <div class="col-md-4">
                             <ul class="list-unstyled text-center">
                                 <br>
-                                <a href="#" class="text-dark">General Sales Condition</a>
+                                <a href=@Url.Action("About","Home", new { @class = "text-dark" }) class="text-dark">General Sales Condition</a>
                                 <br>
                                 <br>
                                 <p> @DateTime.Now.Year &copy; </p>
@@ -84,7 +83,7 @@
                         <div class="col-md-4">
                             <ul class="list-unstyled text-center">
                                 <br>
-                                <a href="#" class="text-dark">F.A.Q.</a>
+                                <a href="~/Views/Home/Contact.cshtml" class="text-dark">F.A.Q.</a>
                                 <br>
                                 <br>
                             </ul>

@@ -325,7 +325,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\SelectionFilters.cshtml" />
     <Content Include="Views\Vehicles\VehicleSelection.cshtml" />
     <Content Include="Views\Vehicles\Fleet.cshtml" />
     <Content Include="Views\Vehicles\VehicleDetails.cshtml" />
