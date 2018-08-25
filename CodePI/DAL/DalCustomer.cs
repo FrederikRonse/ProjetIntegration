@@ -14,7 +14,7 @@ namespace DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns>[Name],[Surname],BirthDate,Email</returns>
-        public static DataTable GetCstmrDetails(int id)
+        public static DataTable GetCstmrById(string id)
         {
             DataTable _dataToReturn = null;
 
@@ -64,6 +64,55 @@ namespace DAL
             return _dataToReturn;
         }
 
+        public static DataTable GetCstmrDetails(string cstmrUserName)
+        {
+            DataTable _dataToReturn = null;
+
+            using (SqlConnection connection = UtilsDAL.GetConnection())
+            {
+                StringBuilder _sLog = new StringBuilder();
+                SqlParameter param1 = new SqlParameter("@UserName", cstmrUserName);
+
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("@SchEmployee.GetCustomerByuserName", connection))
+                    {
+                        DataTable dataTemp = new DataTable();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add(param1);
+                        SqlDataAdapter datadapt = new SqlDataAdapter(command);
+                        _sLog.Append("Open");
+                        connection.Open();
+                        _sLog.Append("Fill");
+                        datadapt.Fill(dataTemp);
+                        _dataToReturn = dataTemp;
+                    }
+                }
+                #region Catch
+                catch (SqlException sqlEx)
+                {
+                    sqlEx.Data.Add("Log", _sLog);
+
+                    switch (sqlEx.Number)
+                    {
+                        case 4060:
+                            throw new CstmEx(ExType.badDB, sqlEx); //"Mauvaise base de données"
+                        case 18456:
+                            throw new CstmEx(ExType.badPWD, sqlEx); //"Mauvais mot de passe"
+
+                        default:
+                            throw new CstmEx(ExType.notHandledSql, sqlEx); //"Erreur SQL non traitée !" L'exception sera rError_Layerancée.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Data.Add("Log", _sLog);
+                    throw new CstmEx(ExType.dtaRead, ex); //"Problème à la récupération des données par la DAL !"
+                }
+                #endregion Catch
+            }
+            return _dataToReturn;
+        }
 
         /// <summary>
         /// Crée un nouveau client.
@@ -140,8 +189,9 @@ namespace DAL
         /// <param name="birthDay"></param>
         /// <param name="email"></param>
         /// <param name="phone"></param>
-        public static void UpdteCstmr(int id, string name, string surName, DateTime birthDay, string email, string phone) //, DateTime LastModified
+        public static void UpdteCstmr(string id, string name, string surName, DateTime birthDay, string email, string phone) //, DateTime LastModified
         {
+            //string _updatedCstmrName = "";
             using (SqlConnection connection = UtilsDAL.GetConnection())
             {
                 StringBuilder _sLog = new StringBuilder();
@@ -154,7 +204,7 @@ namespace DAL
                 SqlParameter[] parameters = { param0, param1, param2, param3, param4, param5 };
                 try
                 {
-                    using (SqlCommand command = new SqlCommand("SchCommon.AddCustomer", connection))
+                    using (SqlCommand command = new SqlCommand("SchCommon.UpdateCustomer", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters);
@@ -164,6 +214,7 @@ namespace DAL
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected == 0) throw new CstmEx(ExType.dtaUpdate); //  La modification n'a pas pu être effectuée ! \n Veuillez réessayer.
                         if (rowsAffected > 1) throw new CstmEx(ExType.sqlLineCount);  // nbre de lignes affectées erroné
+                        //_updatedCstmrName = command.Parameters["@userName"].ToString();
                     }
                 }
                 #region Catch
@@ -188,6 +239,7 @@ namespace DAL
                     throw new CstmEx(ExType.dtaUpdate, ex); //"La modification n'a pas pu être effectuée !"
                 }
                 #endregion Catch
+                //return _updatedCstmrName;
             }
         }
     }

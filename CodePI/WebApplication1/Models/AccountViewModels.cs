@@ -67,14 +67,14 @@ namespace WebApplication1.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserEmail")]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         [MaxLength(50)]
         [Display(Name = "Email")]
         public string Email { get; set; }
         // TODO corriger our remmettre filtres accoutnviewmodels d'origine
-        //[Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassError")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassError")]
         [StringLength(100, ErrorMessageResourceName = "UserPassError", ErrorMessageResourceType = typeof(Resource), MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "UserPassword", ResourceType = typeof(Resource))]
@@ -82,7 +82,7 @@ namespace WebApplication1.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "UserPasswordCfrm", ResourceType = typeof(Resource))]
-        //[Compare("Password", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassCfrmError")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserPassCfrmError")]
         public string ConfirmPassword { get; set; }
 
         [DataType(DataType.Text)]
@@ -107,7 +107,7 @@ namespace WebApplication1.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UserEmail")]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]

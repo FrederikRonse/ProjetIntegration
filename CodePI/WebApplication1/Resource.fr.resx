@@ -276,4 +276,16 @@
   <data name="RegisterSubTitle" xml:space="preserve">
     <value>Veuillez créer un nouveau compte client.</value>
   </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Veuillez entrer une adresse email valide</value>
+  </data>
+  <data name="CstmrDetailsSubTitle" xml:space="preserve">
+    <value>Votre nom d'utilisateur actuel :  </value>
+  </data>
+  <data name="CstmrDetailsTitle" xml:space="preserve">
+    <value>Vos détails de contact</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
 </root>

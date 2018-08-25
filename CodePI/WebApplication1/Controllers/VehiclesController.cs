@@ -153,6 +153,11 @@ namespace WebApplication1.Controllers
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Crée une location de véhicule.
+        /// </summary>
+        /// <param name="vMvehicle"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Rent(VMvehicle vMvehicle)
         {

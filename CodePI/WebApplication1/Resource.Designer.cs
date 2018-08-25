@@ -88,6 +88,24 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Current User Name :  .
+        /// </summary>
+        public static string CstmrDetailsSubTitle {
+            get {
+                return ResourceManager.GetString("CstmrDetailsSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your customer Details.
+        /// </summary>
+        public static string CstmrDetailsTitle {
+            get {
+                return ResourceManager.GetString("CstmrDetailsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily Price.
         /// </summary>
         public static string DailyPrice {
@@ -448,6 +466,15 @@ namespace WebApplication1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid email.
+        /// </summary>
+        public static string UserEmail {
+            get {
+                return ResourceManager.GetString("UserEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         public static string UserFirstName {
@@ -462,6 +489,15 @@ namespace WebApplication1 {
         public static string UserLastName {
             get {
                 return ResourceManager.GetString("UserLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

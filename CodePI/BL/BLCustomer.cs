@@ -14,7 +14,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Customer GetCustomer(int id)
+        public static Customer GetCustomerById(string id)
         {
             Customer _customer = new Customer();
             try
@@ -27,9 +27,50 @@ namespace BL
                         DataRowView row = _table.DefaultView[0];
                         Customer temp = new Customer
                         {
-                            Name = row["Name"].ToString(),
-                            Surname = row["Surname"].ToString(),
-                            BirthDate = DateTime.Parse(row["BirthDate"].ToString()),
+                            Pers_Id = row["Id"].ToString(),
+                            UserName = row["UserName"].ToString(),
+                            Name = row["FirstName"].ToString(),
+                            Surname = row["Lastname"].ToString(),
+                            BirthDate = DateTime.Parse(row["Birthday"].ToString()),
+                            Email = row["Email"].ToString(),
+                            Phone = row["Phone"].ToString()
+                        };
+
+                        _customer = temp;
+                    }
+                }
+                return _customer;
+            }
+            #region Catch
+            catch (CstmEx cstmEx)
+            {
+                throw new CstmEx(ExType.dtaRead, cstmEx);
+            }
+            catch (Exception ex)
+            {
+                throw new CstmEx(ExType.srvrError, ex);
+            }
+            #endregion Catch
+        }
+
+        public static Customer GetCustomer(string cstmrUserName)
+        {
+            Customer _customer = new Customer();
+            try
+            {
+                DataTable _table = DalCustomer.GetCstmrDetails(cstmrUserName);
+                if (_table != null)
+                {
+                    if (_table.Rows.Count != 0)
+                    {
+                        DataRowView row = _table.DefaultView[0];
+                        Customer temp = new Customer
+                        {
+                            Pers_Id = row["Id"].ToString(),
+                            UserName = row["UserName"].ToString(),
+                            Name = row["FirstName"].ToString(),
+                            Surname = row["Lastname"].ToString(),
+                            BirthDate = DateTime.Parse(row["Birthday"].ToString()),
                             Email = row["Email"].ToString(),
                             Phone = row["Phone"].ToString()
                         };
@@ -84,13 +125,14 @@ namespace BL
         /// <param name="Cstmr"></param>
         public static void UpdteCstmr(Customer Cstmr)
         {
+            //string _UpdatedUserName = "";
             if (Cstmr == null)
             {
                 throw new ArgumentNullException(nameof(Cstmr));
             }
             try
             {
-                DalCustomer.UpdteCstmr(Cstmr.Pers_Id, Cstmr.Name, Cstmr.Surname, Cstmr.BirthDate, Cstmr.Email, Cstmr.Phone);
+                DAL.DalCustomer.UpdteCstmr(Cstmr.Pers_Id, Cstmr.Name, Cstmr.Surname, Cstmr.BirthDate, Cstmr.Email, Cstmr.Phone);
             }
             #region Catch
             catch (CstmEx cstmEx)
@@ -102,6 +144,7 @@ namespace BL
                 throw new CstmEx(ExType.srvrError, ex);
             }
             #endregion Catch
+            // return _UpdatedUserName;
         }
     }
 }

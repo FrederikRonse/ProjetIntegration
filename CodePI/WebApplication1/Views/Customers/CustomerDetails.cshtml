@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.View_Models.VMCustomer
+
+@{
+    ViewBag.Title = Resource.CstmrDetailsTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>@Resource.CstmrDetailsSubTitle  @Html.DisplayFor(model => model.UserName)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserBDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserBDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(Resource.UserRgstrBttn, "CustomerDetails", new { cstmrUpdate = Model.UserName }) |
+    @Html.ActionLink(Resource.BackToList,"Home", "Index")
+</p>
