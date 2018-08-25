@@ -9,6 +9,7 @@ using WebApplication1.Models.View_Models;
 
 namespace WebApplication1.Controllers
 {
+   // [Authorize]
     public class HomeController : BaseController
     {
         BO.FilterOptions _filterOptions;

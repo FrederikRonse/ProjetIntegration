@@ -11,6 +11,7 @@ using static EL.CstmEx;
 
 namespace WebApplication1.Controllers
 {
+    //[Authorize]
     public class VehiclesController : BaseController
     {
 
@@ -94,7 +95,7 @@ namespace WebApplication1.Controllers
             if (_pics.Count > 5) _pics.RemoveAt(0);
             _pics.Add(_vMvehicle.PicPath);
             Session["pics"] = _pics;
-            return View("VehicleDetails",_vMvehicle);
+            return View("VehicleDetails", _vMvehicle);
         }
 
         /// <summary>
@@ -147,9 +148,9 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public ActionResult Rent( )
+        public ActionResult Rent()
         {
-           return RedirectToAction("Fleet");
+            return RedirectToAction("Fleet");
             //throw new NotImplementedException();
         }
 
@@ -164,14 +165,14 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {//TODO _rent.CstmrId  & _employeeId
                 int _cstmrId = new int();
-                int _employeeId= new int();
+                int _employeeId = new int();
                 decimal _paid = 0;
-                
-                BO.Rent _rent = new BO.Rent() {VehicleTypeId=vMvehicle.TypeId, CstmrId= _cstmrId, EmployeeId= _employeeId, ReservationDate = DateTime.Now, StartDate =vMvehicle.StartDate, EndDate=vMvehicle.EndDate, ToPay=vMvehicle.PriceToPay, Paid= _paid };
 
-                int _carNumber=BL.BLRent.CreateRent(_rent);
+                BO.Rent _rent = new BO.Rent() { VehicleTypeId = vMvehicle.TypeId, CstmrId = _cstmrId, EmployeeId = _employeeId, ReservationDate = DateTime.Now, StartDate = vMvehicle.StartDate, EndDate = vMvehicle.EndDate, ToPay = vMvehicle.PriceToPay, Paid = _paid };
 
-                VMRent _vmRent = new VMRent() {CarNumber= _carNumber, VehicleTypeId = _rent.VehicleTypeId, CstmrId = _rent.CstmrId, EmployeeId = _rent.EmployeeId, ReservationDate = _rent.ReservationDate, StartDate = _rent.StartDate, EndDate = _rent.EndDate, ToPay = _rent.ToPay, Paid = _rent.Paid };
+                int _carNumber = BL.BLRent.CreateRent(_rent);
+
+                VMRent _vmRent = new VMRent() { CarNumber = _carNumber, VehicleTypeId = _rent.VehicleTypeId, CstmrId = _rent.CstmrId, EmployeeId = _rent.EmployeeId, ReservationDate = _rent.ReservationDate, StartDate = _rent.StartDate, EndDate = _rent.EndDate, ToPay = _rent.ToPay, Paid = _rent.Paid };
 
                 return View(_vmRent);    //rentConfirmation
             }

@@ -155,6 +155,10 @@ namespace WebApplication1.Controllers
             {
                 string _username = (model.UserFirstName != null) ? model.UserFirstName + ' ' + model.UserLastName : "Kéké";
                 var user = new ApplicationUser { UserName = _username, Email = model.Email }; /*new ApplicationUser { UserName = model.Email, Email = model.Email };*/
+
+                //user.Roles.Add("Customer");
+                //userManager.AddToRole(user.Id, "Customer");
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

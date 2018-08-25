@@ -10,6 +10,7 @@ using static EL.CstmEx;
 
 namespace WebApplication1.Controllers
 {
+    //[Authorize]
     public class PromosController : Controller
     {
         /// <summary>

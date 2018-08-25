@@ -330,7 +330,7 @@
     <Content Include="Views\Vehicles\VehicleDetails.cshtml" />
     <Content Include="Views\Promos\Index.cshtml" />
     <Content Include="Views\Vehicles\RentConfirmation.cshtml" />
-    <Content Include="Views\Customer\CustomerRents.cshtml" />
+    <Content Include="Views\Customers\CustomerRents.cshtml" />
     <Content Include="Views\Customers\CustomerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>

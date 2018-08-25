@@ -11,6 +11,7 @@ using static EL.CstmEx;
 
 namespace WebApplication1.Controllers
 {
+   // [Authorize]
     public class CustomersController : Controller
     {
         /// <summary>
